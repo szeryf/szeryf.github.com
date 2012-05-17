@@ -77,12 +77,18 @@
   </section>
 
   <section class="slide">
-    <h1>OOP makes it hard to follow the algorithm</h1>
+    <h1>In OOP, everything happens somewhere else</h1>
+    <p>Adele Goldberg</p>
   </section>
 
   <section class="slide">
-    <h1>MVC makes it hard to follow the algorithm</h1>
+    <h1>OOP makes the algorithm hard to follow</h1>
   </section>
+
+  <section class="slide">
+    <h1>MVC makes the algorithm hard to follow</h1>
+  </section>
+
 
   
   <section class="slide">
@@ -98,17 +104,17 @@
     <h2>Data</h2>
     <ul>
       <li class="slide">
-        <h3>What the system <strong>is</strong>.</h3>
+        <h3>What the system <strong>is</strong></h3>
       </li>
       <li class="slide">
-        <h3>Tends to be stable.</h3>
+        <h3>Tends to be stable</h3>
       </li>
       <li class="slide">
-        <h3>Boring stuff.</h3>
+        <h3>Boring stuff</h3>
       </li>
       <li class="slide">
         <h3>Used in different contexts!</h3>
-        <p class="slide">...which may lead to obesity (in traditional way).</p>
+        <p class="slide">...which may lead to obesity (in traditional way)</p>
       </li>
     </ul>
   </section>
@@ -117,17 +123,17 @@
     <h2>Context</h2>
     <ul>
       <li class="slide">
-        <h3>Provides environment.</h3>
+        <h3>Provides environment</h3>
       </li>
       <li class="slide">
-        <h3>Makes objects play roles.</h3>
+        <h3>Makes objects play roles</h3>
       </li>
       <li class="slide">
-        <h3>Performs use-cases.</h3>
+        <h3>Performs use-cases</h3>
         <ul>
-          <li class="slide">a.k.a. scenarios.</li>
-          <li class="slide">a.k.a. algorithms.</li>
-          <li class="slide">a.k.a. habits.</li>
+          <li class="slide">or scenarios</li>
+          <li class="slide">or algorithms</li>
+          <li class="slide">or habits</li>
         </ul>
       </li>
     </ul>
@@ -137,19 +143,19 @@
     <h2>Interaction</h2>
     <ul>
       <li class="slide">
-        <h3>What the system <strong>does</strong>.</h3>
+        <h3>What the system <strong>does</strong></h3>
       </li>
       <li class="slide">
-        <h3>Tends to change rapidly.</h3>
+        <h3>Tends to change rapidly</h3>
       </li>
       <li class="slide">
         <h3>Interesting stuff!</h3>
       </li>
       <li class="slide">
-        <h3>Roles interacting with each other.</h3>
+        <h3>Roles interacting with each other</h3>
       </li>
       <li class="slide">
-        <h3>Usually not an actual object.</h3>
+        <h3>Usually not an actual object</h3>
       </li>
     </ul>
   </section>
@@ -174,19 +180,19 @@
     <ul>
       <li class="slide">
         <h3>Entity</h3>
-        <p>Application-<strong>independent</strong> business rules.</p>
+        <p>Application-<strong>independent</strong> business rules</p>
       </li>
       <li class="slide">
         <h3>Interactor</h3>
-        <p>Application-<strong>specific</strong> business rules.</p>
+        <p>Application-<strong>specific</strong> business rules</p>
       </li>
       <li class="slide">
         <h3>Delivery mechanism</h3>
-        <p>Should be an implementation detail == a plugin.</p>
+        <p>Should be an implementation detail == a plugin</p>
       </li>
       <li class="slide">
         <h3>Persistence</h3>
-        <p>Should be an implementation detail == a plugin.</p>
+        <p>Should be an implementation detail == a plugin</p>
       </li>
     </ul>
   </section>
@@ -272,24 +278,73 @@
   </section>
   
   <section class="slide">
-    <h1>text</h1>
+    <h1>EXAMPLES!!!</h1>
   </section>
   
   <section class="slide">
-    <h1>text</h1>
+    <h1>PROS</h1>
   </section>
   
   <section class="slide">
-    <h1>text</h1>
+    <h1>readability: whole algorithm in one place</h1>
   </section>
   
   <section class="slide">
-    <h1>text</h1>
+    <h1>dependencies under control</h1>
   </section>
   
+  <section class="slide">
+    <h1>fast tests</h1>
+  </section>
+
+  <section class="slide">
+    <pre style="color:#af0;">
+$ time rake test:usecases
+# Running tests:
+
+.................................
+
+Finished tests in 0.056079s, 588.4556 tests/s, 1676.2068 assertions/s.
+
+33 tests, 94 assertions, 0 failures, 0 errors, 0 skips
+
+real	0m5.284s
+user	0m4.243s
+sys	0m0.946s
+</pre>
+  </section>
   
   <section class="slide">
-    <h1>text</h1>
+    <pre style="color:#af0;">
+$ time rake test:units
+# Running tests:
+
+..................................................................................................................................................................
+
+Finished tests in 33.363820s, 4.8855 tests/s, 8.5422 assertions/s.
+
+163 tests, 285 assertions, 0 failures, 0 errors
+
+real	0m51.735s
+user	0m43.616s
+sys	0m2.795s
+</pre>
+  </section>
+  
+  <section class="slide">
+    <h1>CONS</h1>
+  </section>
+  <section class="slide">
+    <h1>no Rails goodies</h1>
+  </section>
+  <section class="slide">
+    <h1>tedious requires</h1>
+  </section>
+  <section class="slide">
+    <h1>CONS</h1>
+  </section>
+  <section class="slide">
+    <h1>CONS</h1>
   </section>
   <section class="slide">
     <h2>text</h2>
