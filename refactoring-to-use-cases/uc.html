@@ -12,7 +12,22 @@
   <link rel="stylesheet" href="./deck.js/extensions/hash/deck.hash.css">
   <link rel="stylesheet" id="style-theme-link" href="./deck.js/themes/style/neon.css">
   <link rel="stylesheet" id="transition-theme-link" href="./deck.js/themes/transition/fade.css">
+  <link rel="stylesheet" href="./deck.js/extensions/codemirror/deck.codemirror.css">
+  <link rel="stylesheet" href="./deck.js/extensions/codemirror/themes/night.css">
   <script src="./deck.js/modernizr.custom.js"></script>
+  <script src="http://ligature-js.googlecode.com/files/ligature.js"></script>
+  
+  <style>
+    pre {
+      color:#af0;
+    }
+    .CodeMirror-gutter {
+      display: none;
+    }
+    body {
+      font-variant-ligatures: common-ligatures additional-ligatures;
+    }
+  </style>
 </head>
 <body class="deck-container"> 
   <section class="slide" id="title-slide">
@@ -27,7 +42,7 @@
   </section>
 
   <section class="slide">
-    <h1>me</h1>
+    <h1>about me</h1>
   </section>
   
   <section class="slide" id="toc">
@@ -52,7 +67,7 @@
   </section>
 
   <section class="slide">
-    <h1>MVC</h1>
+    <h1>MVC<span class="slide"><br>is the new COBOL?</span></h1>
   </section>
   
   <section class="slide">
@@ -77,16 +92,20 @@
   </section>
 
   <section class="slide">
+    <h1>There's more than Model, View &amp; Controller</h1>
+  </section>
+
+  <section class="slide">
+    <h1>MVC makes use-cases hard to follow</h1>
+  </section>
+
+  <section class="slide">
+    <h1>OOP makes use-cases hard to follow</h1>
+  </section>
+
+  <section class="slide">
     <h1>In OOP, everything happens somewhere else</h1>
     <p>Adele Goldberg</p>
-  </section>
-
-  <section class="slide">
-    <h1>OOP makes the algorithm hard to follow</h1>
-  </section>
-
-  <section class="slide">
-    <h1>MVC makes the algorithm hard to follow</h1>
   </section>
 
 
@@ -97,7 +116,7 @@
   </section>
 
   <section class="slide">
-    <h1>Data<br>Context<br>Integration</h1>
+    <h1>Data<br>Context<br>Interaction</h1>
   </section>
   
   <section class="slide">
@@ -113,6 +132,9 @@
         <h3>Boring stuff</h3>
       </li>
       <li class="slide">
+        <h3>Dumb data-structures, zero cleverness</h3>
+      </li>
+      <li class="slide">
         <h3>Used in different contexts!</h3>
         <p class="slide">...which may lead to obesity (in traditional way)</p>
       </li>
@@ -123,18 +145,18 @@
     <h2>Context</h2>
     <ul>
       <li class="slide">
-        <h3>Provides environment</h3>
-      </li>
-      <li class="slide">
-        <h3>Makes objects play roles</h3>
-      </li>
-      <li class="slide">
         <h3>Performs use-cases</h3>
         <ul>
           <li class="slide">or scenarios</li>
           <li class="slide">or algorithms</li>
           <li class="slide">or habits</li>
         </ul>
+      </li>
+      <li class="slide">
+        <h3>Makes objects play roles</h3>
+      </li>
+      <li class="slide">
+        <h3>Provides environment</h3>
       </li>
     </ul>
   </section>
@@ -180,11 +202,11 @@
     <ul>
       <li class="slide">
         <h3>Entity</h3>
-        <p>Application-<strong>independent</strong> business rules</p>
+        <p>Dumb data, application-<strong>independent</strong> business rules</p>
       </li>
       <li class="slide">
         <h3>Interactor</h3>
-        <p>Application-<strong>specific</strong> business rules</p>
+        <p>Application-<strong>specific</strong> business rules == use-cases</p>
       </li>
       <li class="slide">
         <h3>Delivery mechanism</h3>
@@ -227,7 +249,8 @@
     <h2>It's Business Time by Jim Gay </h2>
     <ul>
       <li class="slide">
-        <h3>Data != Domain</h3>
+        <h3>Data model != Domain model</h3>
+        <h3 class="slide">i.e. ActiveRecord::Base != models</h3>
       </li>
       <li class="slide">
         <h3>separate what is stable and what changes</h3>
@@ -239,10 +262,13 @@
   </section>
 
   <section class="slide">
-    <h2>Object on Rails</h2>
+    <h2>Objects on Rails</h2>
     <ul>
       <li class="slide">
-        <h3>DI in Ruby!</h3>
+        <h3>Single Responsibility Principle</h3>
+      </li>
+      <li class="slide">
+        <h3>Dependency Injection in Ruby!</h3>
       </li>
       <li class="slide">
         <h3>de-couple as much as possible</h3>
@@ -282,11 +308,256 @@
   </section>
   
   <section class="slide">
+    <h1>Caveat emptor: still<br><u>work in progress</u></h1>
+  </section>
+
+  <section class="slide">
+    <h1>Before</h1>
+  </section>
+
+  <section class="slide">
+    <h2>role.rb</h2>
+    <textarea class="code" mode="ruby" style="display: none;" theme="night">
+class Role < ActiveRecord::Base
+
+  belongs_to :user
+  belongs_to :project
+  ROLES = %w{creator member supervisor applicant follower}
+
+  validates :role_type, :inclusion => ROLES
+
+  after_create :notify_applicable_user, :unless => :accepted?
+
+  state_machine :initial => :pending do
+    state :pending, :accepted, :applied
+
+    after_transition any => :accepted, :do => :create_activity_item
+    after_transition :applied => :accepted, :do => :accept_applicant
+
+    event :accept do
+      transition :pending => :accepted
+      #create_notification
+    end
+
+    event :accept_application do 
+      transition :applied => :accepted
+    end
+  end
+
+  def self.create_roles(users, project)
+    users.each do |user|
+      Role.create!(:user => user, :project => project, :role_type => 'member')
+    end
+  end
+
+  def self.create_member(user, project)
+    Role.create!(:user => user, :project => project, :role_type => 'member', :state => 'accepted')
+  end
+
+  def self.create_owner(user, project)
+    Role.create!(:user => user, :project => project, :role_type => 'creator', :state => 'accepted')
+    project.create_activity_item
+  end
+
+  def self.create_follower(project, user)
+    Role.create!(:user => user, :project => project, :role_type => 'follower', :state => 'accepted')
+  end
+
+  def self.create_user_follower(following_user, user)
+    following_user.own_projects.each do |project|
+      create_follower(project, user)
+    end
+  end
+
+  def change!(value)
+    update_attribute(:role_type, value)
+  end
+
+  def accept_applicant
+    self.role_type = "member"
+    self.save
+  end
+
+  private
+
+    def notify_applicable_user
+      if state == "pending" # user has been invited to join
+        notify_user
+      elsif state == "applied" # user has applied to join
+        notify_project_owner
+      end 
+    
+    end
+
+    def notify_user
+      path    = Rails.application.routes.url_helpers.accept_project_role_path(project, self)
+      subject = "You have been invited to project called #{project.name}"
+      body    = "<a href=\"#{path}\">Accept invitation here</a>"
+      Message.create_notification!(subject, body, user)
+    end
+
+    def notify_project_owner
+      path    = Rails.application.routes.url_helpers.accept_application_project_role_path(project, self)
+      subject = "#{user.name} would like to join your project called #{project.name}"
+      body    = "To Accept <a href=\"/users/#{user.id}\">#{(user.name)}'s</a> application, <a href=\"#{path}\">click here</a>"
+      Message.create_notification!(subject, body, self.project.owner)
+    end
+
+    def create_activity_item
+      aid = ActivityItem.gen_aid
+
+      # User has joined Project
+      ActivityItem.create_item(subject: self.user, item: self, second_subject: self.project, description: "NEW", activity_identifier: aid)
+
+      # Project owner has welcomed new user
+      ActivityItem.create_item(subject: self.project.owner, item: self, second_subject: self.user, description: "WELCOME", activity_identifier: aid)
+    end
+end
+    </textarea>
+  </section>
+
+  <section class="slide">
+    <h1>Single Responsibility Principle?</h1>
+  </section>
+  
+  <section class="slide">
+    <h2>#1 Role is sending notifications!</h2>
+    <textarea class="code" mode="ruby" style="display: none;" theme="night">
+after_create :notify_applicable_user, :unless => :accepted?
+
+private
+  def notify_applicable_user
+    if state == "pending" # user has been invited to join
+      notify_user
+    elsif state == "applied" # user has applied to join
+      notify_project_owner
+    end 
+  end
+    </textarea>
+    <image class="slide vcenter" src="./20608737.jpg">
+  </section>
+
+  <section class="slide">
+    <h2>#2 Role is producing HTML!</h2>
+    <textarea class="code" mode="ruby" style="display: none;" theme="night">
+def notify_user
+  path    = Rails.application.routes.url_helpers
+              .accept_project_role_path(project, self)
+  subject = "You have been invited to project called #{project.name}"
+  body    = "&lt;a href=\"#{path}\">Accept invitation here&lt;/a>"
+  Message.create_notification!(subject, body, user)
+end
+
+def notify_project_owner
+  path    = Rails.application.routes.url_helpers
+              .accept_application_project_role_path(project, self)
+  subject = "#{user.name} would like to join your project called #{project.name}"
+  body    = "To Accept &lt;a href=\"/users/#{user.id}\">#{(user.name)}'s&lt;/a> 
+                application, &lt;a href=\"#{path}\">click here&lt;/a>"
+  Message.create_notification!(subject, body, self.project.owner)
+end
+    </textarea>
+  </section>
+
+  <section class="slide">
+    <h2>#3 Role has a state machine</h2>
+    <textarea class="code" mode="ruby" style="display: none;" theme="night">
+state_machine :initial => :pending do
+  state :pending, :accepted, :applied
+
+  after_transition any => :accepted, :do => :create_activity_item
+  after_transition :applied => :accepted, :do => :accept_applicant
+
+  event :accept do
+    transition :pending => :accepted
+    #create_notification
+  end
+
+  event :accept_application do 
+    transition :applied => :accepted
+  end
+end
+
+def accept_applicant
+  self.role_type = "member"
+  self.save
+end
+    </textarea>
+  </section>
+  
+  <section class="slide">
+    <h2>#4 Role creates activity items</h2>
+    <textarea class="code" mode="ruby" style="display: none;" theme="night">
+def create_activity_item
+  aid = ActivityItem.gen_aid
+
+  # User has joined Project
+  ActivityItem.create_item(subject: self.user, item: self, second_subject: 
+               self.project, description: "NEW", activity_identifier: aid)
+
+  # Project owner has welcomed new user
+  ActivityItem.create_item(subject: self.project.owner, item: self, second_subject: 
+               self.user, description: "WELCOME", activity_identifier: aid)
+end
+    </textarea>
+  </section>
+  
+  <section class="slide">
+    <h2>#5 Role creates some stuff</h2>
+    <textarea class="code" mode="ruby" style="display: none;" theme="night">
+def self.create_roles(users, project)
+  users.each do |user|
+    Role.create!(:user => user, :project => project, :role_type => 'member')
+  end
+end
+
+def self.create_member(user, project)
+  Role.create!(:user => user, :project => project, :role_type => 'member', 
+               :state => 'accepted')
+end
+
+def self.create_owner(user, project)
+  Role.create!(:user => user, :project => project, :role_type => 'creator', 
+               :state => 'accepted')
+  project.create_activity_item
+end
+
+def self.create_follower(project, user)
+  Role.create!(:user => user, :project => project, :role_type => 'follower', 
+               :state => 'accepted')
+end
+
+def self.create_user_follower(following_user, user)
+  following_user.own_projects.each do |project|
+    create_follower(project, user)
+  end
+end
+    </textarea>
+  </section>
+  
+  <section class="slide">
+    <h2>role.rb</h2>
+    <textarea class="code" mode="ruby" style="display: none;" theme="night">
+    </textarea>
+  </section>
+  
+  <section class="slide">
+    <h2>role.rb</h2>
+    <textarea class="code" mode="ruby" style="display: none;" theme="night">
+    </textarea>
+  </section>
+  
+  
+  <section class="slide">
     <h1>PROS</h1>
   </section>
   
   <section class="slide">
     <h1>readability: whole algorithm in one place</h1>
+  </section>
+  
+  <section class="slide">
+    <h1>easier to modify</h1>
   </section>
   
   <section class="slide">
@@ -298,7 +569,7 @@
   </section>
 
   <section class="slide">
-    <pre style="color:#af0;">
+    <pre>
 $ time rake test:usecases
 # Running tests:
 
@@ -311,11 +582,11 @@ Finished tests in 0.056079s, 588.4556 tests/s, 1676.2068 assertions/s.
 real	0m5.284s
 user	0m4.243s
 sys	0m0.946s
-</pre>
+    </pre>
   </section>
   
   <section class="slide">
-    <pre style="color:#af0;">
+    <pre>
 $ time rake test:units
 # Running tests:
 
@@ -341,8 +612,37 @@ sys	0m2.795s
     <h1>tedious requires</h1>
   </section>
   <section class="slide">
-    <h1>CONS</h1>
+    <h1>brittle tests?</h1>
   </section>
+  
+  <section class="slide">
+    <h1>Thank you!</h1>
+  </section>
+    
+  <section class="slide">
+    <h2>Where do I find...</h2>
+    <ul>
+      <li>
+        <h3>This presentation</h3>
+        <a href="http://szeryf.github.com/refactoring-to-use-cases/uc.html">
+          http://szeryf.github.com/refactoring-to-use-cases/uc.html
+        </a>
+      </li>
+      <li>
+        <h3>My github account</h2>
+        <a href="http://github.com/szeryf">
+          http://github.com/szeryf
+        </a>
+      </li>
+      <li>
+        <h3>My almost defunct blog</h2>
+        <a href="http://szeryf.wordpress.com/">
+          http://szeryf.wordpress.com/
+        </a>
+      </li>
+    </div>
+  </section>
+  
   <section class="slide">
     <h1>CONS</h1>
   </section>
@@ -409,9 +709,30 @@ sys	0m2.795s
 
   <script src="./deck.js/extensions/status/deck.status.js"></script>
   <script src="./deck.js/extensions/navigation/deck.navigation.js"></script>
+  <!-- Base codemiror code -->
+  <script src="./deck.js/extensions/codemirror/codemirror.js"></script>
+
+  <!-- Syntax highlighting Modes see https://github.com/iros/deck.js-codemirror -->
+  <!-- javascript -->
+  <script src="./deck.js/extensions/codemirror/mode/javascript/javascript.js"></script>
+
+  <!-- html mode (note html mode requires xml, css and javascript) -->
+  <script src="./deck.js/extensions/codemirror/mode/xml/xml.js"></script>
+  <script src="./deck.js/extensions/codemirror/mode/css/css.js"></script>
+  <script src="./deck.js/extensions/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+
+  <!-- ruby -->
+  <script src="./deck.js/extensions/codemirror/mode/ruby/ruby.js"></script>
+
+  <!-- Plugin code -->
+  <script src="./deck.js/extensions/codemirror/deck.codemirror.js"></script>
+
   <script>
     $(function() {
       $.deck('.slide');
+    });
+    $(document).ready(function () {
+      //ligature();
     });
   </script> 
 </body>
