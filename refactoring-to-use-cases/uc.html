@@ -27,6 +27,36 @@
     body {
       font-variant-ligatures: common-ligatures additional-ligatures;
     }
+    .slide h1 > img {
+       margin-bottom: 0px
+    }
+    .opac6 {
+      opacity: 0.6;
+    }
+    .opac4 {
+      opacity: 0.4;
+    }
+    img.bg {
+      /* Set rules to fill background */
+      min-height: 100%;
+      min-width: 1024px;
+
+      /* Set up proportionate scaling */
+      width: 100%;
+      height: auto;
+
+      /* Set up positioning */
+      position: fixed;
+      top: 0;
+      left: 0;
+    }
+
+    @media screen and (max-width: 1024px) { /* Specific to this particular image */
+      img.bg {
+        left: 50%;
+        margin-left: -512px;   /* 50% */
+      }
+    }
   </style>
 </head>
 <body class="deck-container">
@@ -42,7 +72,10 @@
   </section>
 
   <section class="slide">
-    <h1>about me</h1>
+    <h1>
+      <img src="http://2.gravatar.com/avatar/024f6d59fd34ceca04f3fc18a87bdb98?size=420">
+      about me
+    </h1>
   </section>
 
   <section class="slide">
@@ -64,55 +97,103 @@
   </section>
 
   <section class="slide">
-    <h1>the traditional way</h1>
+    <h1>
+      <img src="http://images.wikia.com/fallout/images/b/bc/Vault_Boy.png" class="opac6">
+      the traditional way
+    </h1>
   </section>
 
   <section class="slide">
-    <h1>MVC<span class="slide"><br>is the new COBOL?</span></h1>
+    <h1>
+      MVC
+      <span class="slide">
+        <br>
+        considered harmful?
+        <img src="http://images4.wikia.nocookie.net/__cb20120515012304/fallout/images/1/1b/Pip_Boy_Bullseye.JPG" width="250em">
+      </span>
+    </h1>
   </section>
 
   <section class="slide">
-    <h1>Rails made me do it</h1>
-  </section>
-
-  <section class="slide">
-    <h1>fat model,<br>skinny controller</h1>
-    <p>Jamis Buck, 2006</p>
+    <h1>
+      <img src="http://images1.wikia.nocookie.net/__cb20091116174712/fallout/images/5/5d/Jinxed.png" style="opacity:1;" width="250em">
+      Rails made me do it
+    </h1>
   </section>
 
   <section class="slide">
     <img class="vcenter" src="http://www.ayearwithoutcandy.com/wp-content/uploads/2010/10/fat-skinny2.jpg">
+    <p>Jamis Buck, 2006</p>
   </section>
 
   <section class="slide">
-    <h1>obese model,<br>not so skinny controller</h1>
+    <img class="vcenter opac6" src="http://pu.i.wp.pl/k,NjcwMjA5MzQsNDY0MjkwNzk=,f,fat-girls-and-fries.jpg">
+    <h1>
+      <strong>obese</strong> model,
+      <br>
+      not so skinny controller
+    </h1>
   </section>
 
   <section class="slide">
-    <img class="vcenter" src="http://pu.i.wp.pl/k,NjcwMjA5MzQsNDY0MjkwNzk=,f,fat-girls-and-fries.jpg">
+    <h1>
+      <img src="http://images.wikia.com/fallout/images/c/cd/Mad_Bomber_perk.png" class="opac6" width="250em">
+      there's <strong>more</strong> than Model, View &amp; Controller
+    </h1>
   </section>
 
   <section class="slide">
-    <h1>There's more than Model, View &amp; Controller</h1>
+    <h1>
+      <img src="http://images.wikia.com/fallout/images/8/86/FB8_deco_3.png" width="250em" class="opac6">
+      MVC makes use-cases difficult to <strong>read</strong>
+    </h1>
   </section>
 
   <section class="slide">
-    <h1>MVC makes use-cases hard to follow</h1>
+    <h1>
+      <img src="http://images.wikia.com/fallout/images/7/7b/Bloody_Mess_FO3.png" class="opac6" width="400em">
+      use-case spread over many files
+    </h1>
   </section>
 
   <section class="slide">
-    <h1>OOP makes use-cases hard to follow</h1>
+    <h1>
+      shotgun surgery
+      <img src="http://images4.wikia.nocookie.net/__cb20101012145040/fallout/images/0/08/ShotgunSurgeon.png" class="opac6">
+    </h1>
   </section>
 
   <section class="slide">
+    <h1>
+      <img src="http://images4.wikia.nocookie.net/__cb20110122230241/fallout/images/5/5b/CaesarLegionReputation.png" class="opac6" width="400em">
+      cohesion
+    </h1>
+  </section>
+
+  <section class="slide">
+    <h1>
+      <img src="http://images.wikia.com/fallout/images/e/e9/Beta_Software.png" class="opac6" width="250em">
+      class has <strong>exactly&nbsp;one</strong> reason to change
+    </h1>
+    <p>Robert C. Martin, <em>Agile Software Development, Principles, Patterns, and Practices</em></p>
+    
+  </section>
+
+  <section class="slide">
+    <img src="http://images4.wikia.nocookie.net/__cb20090903122023/fallout/images/e/eb/VaultComputer.png" class="opac4 vcenter" width="500em">
+    <h1>
+      OOP makes use-cases difficult to <strong>read</strong>
+    </h1>
+  </section>
+
+  <section class="slide">
+    <img src="http://images.wikia.com/fallout/images/a/a7/Fallout_3_-_spawn_point_map.png" class="bg opac4">
     <h1>In OOP, everything happens somewhere else</h1>
     <p>Adele Goldberg</p>
   </section>
 
-
-
   <section class="slide">
-    <img class="vcenter" src="http://25.media.tumblr.com/tumblr_ljfdhvMAVA1qzs32ro1_500.jpg" style="opacity:0.4;" width="630em">
+    <img src="http://25.media.tumblr.com/tumblr_ljfdhvMAVA1qzs32ro1_500.jpg" class="vcenter opac4" width="640em">
     <h1>A new hope</h1>
   </section>
 
@@ -184,6 +265,40 @@
   </section>
 
   <section class="slide">
+    <h2>DCI in example</h2>
+    <textarea class="code" mode="ruby" style="display: none;" theme="night">
+class Account
+  attr_accessor :balance
+end
+
+class TransferMoneyContext
+  def perform src_id, dst_id, amount
+    src_act = AccountRepo.fetch(src_id)
+    src_act.extend(TransferMoneySourceAccount)
+    dst_act = AccountRepo.fetch(src_id)
+    dst_act.extend(TransferMoneyDestinationAccount)
+    
+    src_act.transfer(amount, dst_act)
+  end
+end
+
+class TransferMoneySourceAccount
+  def transfer amount, dst_act
+    if self.balance < amount
+      raise InsufficientFunds.new
+    else
+      transaction do
+        self.balance -= amount
+        self.log("transfer out", Time.now, amount)
+        dst_act.transfer_in(amount)
+      end
+    end
+  end
+end
+    </textarea>
+  </section>
+    
+  <section class="slide">
     <div class="vcenter">
       <h1>Architecture<br>The Lost Years</h2>
       <h3>by Uncle Bob Martin</h3>
@@ -238,11 +353,11 @@
   </section>
 
   <section class="slide">
-    <h1>Good architecture allows to defer decisions</h1>
+    <h1>Good architecture allows to <strong>defer</strong> decisions</h1>
   </section>
 
   <section class="slide">
-    <h1>...maximizes number of decisions NOT made</h1>
+    <h1>...maximizes number of decisions <strong>not</strong> made</h1>
   </section>
 
   <section class="slide">
@@ -298,21 +413,34 @@
 
   <section class="slide">
     <div class="vcenter">
-      <h1>This will be mainstream in 5 years</h1>
+      <h1>
+        <img src="http://images1.wikia.nocookie.net/__cb20110809182237/fallout/images/thumb/c/c0/VaultBoyFO3.png/715px-VaultBoyFO3.png" class="opac6" width="250em">
+        This will be mainstream in 5 years
+      </h1>
       <h3 class="slide">(except Java)</h3>
     </div>
   </section>
 
   <section class="slide">
-    <h1>EXAMPLES!!!</h1>
+    <h1>
+      <img src="http://images.wikia.com/fallout/images/a/a9/Computer_Whiz.png" class="opac6" width="250em">
+      examples
+    </h1>
   </section>
 
   <section class="slide">
-    <h1>Caveat emptor: still<br><u>work in progress</u></h1>
+    <h1>
+      <em>caveat emptor:</em>
+      <br>
+      <strong>work in progress</strong>
+    </h1>
   </section>
 
   <section class="slide">
-    <h1>Before</h1>
+    <h1>
+      before
+      <img src="http://images.wikia.com/fallout/images/c/c1/Gun_Nut.png" class="opac6" width="250em">
+    </h1>
   </section>
 
   <section class="slide">
@@ -417,7 +545,10 @@ end
   </section>
 
   <section class="slide">
-    <h1>Single Responsibility Principle?</h1>
+    <h1>
+      <img src="http://images3.wikia.nocookie.net/__cb20120515011660/fallout/images/7/70/Pip_Boy_OMG.JPG" class="opac6" width="250em">
+      Single Responsibility Principle?
+    </h1>
   </section>
 
   <section class="slide">
