@@ -18,9 +18,9 @@
   <script src="http://ligature-js.googlecode.com/files/ligature.js"></script>
 
   <style>
-    /*pre {
-          color:#af0;
-        }*/
+    pre {
+      color:#af0;
+    }
     .CodeMirror-gutter {
       display: none;
     }
@@ -60,9 +60,21 @@
     .slide strong {
       font-weight: 1000;
     }
+    .slide.inverse {
+      background-color: white;
+    }
+    .slide.inverse h1 {
+      color: black;
+      text-shadow: 0 0 5px #000, 0 0 3px #fff;
+/*      letter-spacing: -0.05em;*/
+    }
+    .slide.inverse .opac6 {
+      opacity: 1 !important;
+    }
+    
   </style>
 </head>
-<body class="deck-container">
+<body class="deck-container prettify">
   <section class="slide">
     <div class="vcenter">
       <h1>Refactoring to use-cases</h1>
@@ -74,7 +86,7 @@
     </div>
   </section>
 
-  <section class="slide">
+  <section class="slide inverse">
     <h1>
       <img src="http://2.gravatar.com/avatar/024f6d59fd34ceca04f3fc18a87bdb98?size=420">
       about me
@@ -99,9 +111,9 @@
     </ol>
   </section>
 
-  <section class="slide">
+  <section class="slide inverse">
     <h1>
-      <img src="http://images.wikia.com/fallout/images/b/bc/Vault_Boy.png" class="opac6">
+      <img src="http://images.wikia.com/fallout/images/b/bc/Vault_Boy.png" >
       the traditional way
     </h1>
   </section>
@@ -111,25 +123,25 @@
       MVC
       <span class="slide">
         <br>
-        considered harmful?
+        considered <strong>harmful?</strong>
         <img src="http://images4.wikia.nocookie.net/__cb20120515012304/fallout/images/1/1b/Pip_Boy_Bullseye.JPG" width="250em">
       </span>
     </h1>
   </section>
 
-  <section class="slide">
+  <section class="slide inverse">
     <h1>
       <img src="http://images1.wikia.nocookie.net/__cb20091116174712/fallout/images/5/5d/Jinxed.png" style="opacity:1;" width="250em">
       Rails made me do it
     </h1>
   </section>
 
-  <section class="slide">
+  <section class="slide inverse">
     <img class="vcenter" src="http://www.ayearwithoutcandy.com/wp-content/uploads/2010/10/fat-skinny2.jpg">
     <p>Jamis Buck, 2006</p>
   </section>
 
-  <section class="slide">
+  <section class="slide inverse">
     <img class="vcenter opac6" src="http://pu.i.wp.pl/k,NjcwMjA5MzQsNDY0MjkwNzk=,f,fat-girls-and-fries.jpg">
     <h1>
       <strong>obese</strong> model,
@@ -145,9 +157,9 @@
     </h1>
   </section>
 
-  <section class="slide">
+  <section class="slide inverse">
     <h1>
-      <img src="http://images.wikia.com/fallout/images/8/86/FB8_deco_3.png" width="250em" class="opac6">
+      <img src="http://images.wikia.com/fallout/images/8/86/FB8_deco_3.png" width="250em">
       MVC makes use-cases difficult to <strong>read</strong>
     </h1>
   </section>
@@ -173,7 +185,7 @@
     </h1>
   </section>
 
-  <section class="slide">
+  <section class="slide inverse">
     <h1>
       <img src="http://images.wikia.com/fallout/images/e/e9/Beta_Software.png" class="opac6" width="250em">
       class has <strong>exactly&nbsp;one</strong> reason to change
@@ -435,7 +447,7 @@ end
     <h1>
       <em>caveat emptor:</em>
       <br>
-      <strong>work in progress</strong>
+      work in progress
     </h1>
   </section>
 
@@ -690,37 +702,19 @@ end
   </section>
 
   <section class="slide">
-    <h1>use-cases easy to follow</h1>
+    <h1>use-cases easy to <strong>follow</strong></h1>
   </section>
 
   <section class="slide">
-    <h1>easier to modify</h1>
+    <h1>easier to <strong>modify</strong></h1>
   </section>
 
   <section class="slide">
-    <h1>dependencies under control</h1>
+    <h1>dependencies under <strong>control</strong></h1>
   </section>
 
   <section class="slide">
-    <h1>crazy fast tests</h1>
-  </section>
-
-  <section class="slide">
-    <h2>use cases</h2>
-    <pre>
-$ time rake test:usecases
-# Running tests:
-
-.................................
-
-Finished tests in 0.056079s, 588.4556 tests/s, 1676.2068 assertions/s.
-
-33 tests, 94 assertions, 0 failures, 0 errors, 0 skips
-
-real	0m5.284s
-user	0m4.243s
-sys	0m0.946s
-    </pre>
+    <h1><strong>crazy</strong> fast tests</h1>
   </section>
 
   <section class="slide">
@@ -735,17 +729,71 @@ Finished tests in 33.363820s, 4.8855 tests/s, 8.5422 assertions/s.
 
 163 tests, 285 assertions, 0 failures, 0 errors
 
-real	0m51.735s
-user	0m43.616s
-sys	0m2.795s
+real  0m51.735s
+user  0m43.616s
+sys 0m2.795s
 </pre>
+  </section>
+
+  <section class="slide">
+    <h2>units</h2>
+    <pre>
+$ time rake test:units
+# Running tests:
+
+..................................................................................................................................................................
+
+Finished tests in <u>33.363820s</u>, 4.8855 tests/s, 8.5422 assertions/s.
+
+163 tests, 285 assertions, 0 failures, 0 errors
+
+real  <u>0m51.735s</u>
+user  0m43.616s
+sys 0m2.795s
+</pre>
+  </section>
+
+  <section class="slide">
+    <h2>use cases</h2>
+    <pre>
+$ time rake test:usecases
+# Running tests:
+
+................................................
+
+Finished tests in 0.081814s, 586.6967 tests/s, 1821.2042 assertions/s.
+
+48 tests, 149 assertions, 0 failures, 0 errors, 0 skips
+
+real  0m6.375s
+user  0m5.115s
+sys 0m1.175s
+    </pre>
+  </section>
+
+  <section class="slide">
+    <h2>use cases</h2>
+    <pre>
+$ time rake test:usecases
+# Running tests:
+
+................................................
+
+Finished tests in <u>0.081814s</u>, 586.6967 tests/s, 1821.2042 assertions/s.
+
+48 tests, 149 assertions, 0 failures, 0 errors, 0 skips
+
+real  <u>0m6.375s</u>
+user  0m5.115s
+sys 0m1.175s
+    </pre>
   </section>
 
   <section class="slide">
     <h1>CONS</h1>
   </section>
   <section class="slide">
-    <h1>no Rails goodies</h1>
+    <h1>no Rails <strong>goodies</strong></h1>
   </section>
   <section class="slide">
     <h1>tedious requires</h1>
@@ -877,12 +925,14 @@ sys	0m2.795s
   <!-- Plugin code -->
   <script src="./deck.js/extensions/codemirror/deck.codemirror.js"></script>
 
+  <script src="http://jsprettify.googlecode.com/files/jsprettify-all-latest.js"></script>
+
   <script>
     $(function() {
       $.deck('.slide');
     });
     $(document).ready(function () {
-      //ligature();
+      window.jsprettify.run();
     });
   </script>
 </body>
