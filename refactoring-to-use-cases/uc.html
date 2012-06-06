@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="./deck.js/extensions/navigation/deck.navigation.css">
   <link rel="stylesheet" href="./deck.js/extensions/status/deck.status.css">
   <link rel="stylesheet" href="./deck.js/extensions/hash/deck.hash.css">
-  <link rel="stylesheet" id="style-theme-link" href="./deck.js/themes/style/neon.css">
+  <link rel="stylesheet" id="style-theme-link" href="./deck.js/themes/style/mine.css">
   <link rel="stylesheet" id="transition-theme-link" href="./deck.js/themes/transition/fade.css">
   <link rel="stylesheet" href="./deck.js/extensions/codemirror/deck.codemirror.css">
   <link rel="stylesheet" href="./deck.js/extensions/codemirror/themes/night.css">
@@ -18,9 +18,9 @@
   <script src="http://ligature-js.googlecode.com/files/ligature.js"></script>
 
   <style>
-    pre {
-      color:#af0;
-    }
+    /*pre {
+          color:#af0;
+        }*/
     .CodeMirror-gutter {
       display: none;
     }
@@ -57,6 +57,9 @@
         margin-left: -512px;   /* 50% */
       }
     }
+    .slide strong {
+      font-weight: 1000;
+    }
   </style>
 </head>
 <body class="deck-container">
@@ -67,7 +70,7 @@
       <h3 class="slide">or:<br> Use-cases&mdash;The Lost Years</h3>
       <br>
       <br>
-      <h4>Przemyslaw::Kowalczyk a.k.a. szeryf</h4>
+      <h4>Przemysław::Kowalczyk a.k.a. szeryf</h4>
     </div>
   </section>
 
@@ -180,7 +183,7 @@
   </section>
 
   <section class="slide">
-    <img src="http://images4.wikia.nocookie.net/__cb20090903122023/fallout/images/e/eb/VaultComputer.png" class="opac4 vcenter" width="500em">
+    <img src="http://images4.wikia.nocookie.net/__cb20090903122023/fallout/images/e/eb/VaultComputer.png" class="vcenter opac4" height="100%">
     <h1>
       OOP makes use-cases difficult to <strong>read</strong>
     </h1>
@@ -703,6 +706,7 @@ end
   </section>
 
   <section class="slide">
+    <h2>use cases</h2>
     <pre>
 $ time rake test:usecases
 # Running tests:
@@ -720,6 +724,7 @@ sys	0m0.946s
   </section>
 
   <section class="slide">
+    <h2>units</h2>
     <pre>
 $ time rake test:units
 # Running tests:
@@ -829,8 +834,19 @@ sys	0m2.795s
 
 
 
+  <form action="." method="get" class="goto-form">
+  	<label for="goto-slide">Go to slide:</label>
+  	<input type="text" name="slidenum" id="goto-slide" list="goto-datalist">
+  	<datalist id="goto-datalist"></datalist>
+  	<input type="submit" value="Go">
+  </form>
 
-
+  <p class="deck-status">
+  	<span class="deck-status-current"></span>
+  	/
+  	<span class="deck-status-total"></span>
+  </p>
+  
   <!-- Grab CDN jQuery, with a protocol relative URL; fall back to local if offline -->
   <script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
   <script>window.jQuery || document.write('<script src="./deck.js/jquery-1.7.min.js"><\/script>')</script>
