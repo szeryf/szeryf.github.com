@@ -65,13 +65,17 @@
     }
     .slide.inverse h1 {
       color: black;
-      text-shadow: 0 0 5px #000, 0 0 3px #fff;
-/*      letter-spacing: -0.05em;*/
+      text-shadow: 0 0 10px #444;
+    }
+    .slide.inverse h1.whiteshadow {
+      text-shadow: 0 0 10px #fff;
     }
     .slide.inverse .opac6 {
       opacity: 1 !important;
     }
-    
+    a {
+      font-family: monospace, sans-serif;
+    }
   </style>
 </head>
 <body class="deck-container prettify">
@@ -143,17 +147,17 @@
 
   <section class="slide inverse">
     <img class="vcenter opac6" src="http://pu.i.wp.pl/k,NjcwMjA5MzQsNDY0MjkwNzk=,f,fat-girls-and-fries.jpg">
-    <h1>
+    <h1 class="whiteshadow">
       <strong>obese</strong> model,
       <br>
-      not so skinny controller
+      not so <strong>skinny</strong> controller
     </h1>
   </section>
 
   <section class="slide">
     <h1>
       <img src="http://images.wikia.com/fallout/images/c/cd/Mad_Bomber_perk.png" class="opac6" width="250em">
-      there's <strong>more</strong> than Model, View &amp; Controller
+      there's <strong>more</strong> than <em>Model, View &amp; Controller</em>
     </h1>
   </section>
 
@@ -167,7 +171,7 @@
   <section class="slide">
     <h1>
       <img src="http://images.wikia.com/fallout/images/7/7b/Bloody_Mess_FO3.png" class="opac6" width="400em">
-      use-case spread over many files
+      use-case spread over <strong>many</strong> files
     </h1>
   </section>
 
@@ -243,11 +247,7 @@
     <ul>
       <li class="slide">
         <h3>Performs use-cases</h3>
-        <ul>
-          <li class="slide">or scenarios</li>
-          <li class="slide">or algorithms</li>
-          <li class="slide">or habits</li>
-        </ul>
+        a.k.a. scenarios, algorithms, habits
       </li>
       <li class="slide">
         <h3>Makes objects play roles</h3>
@@ -324,7 +324,7 @@ end
   </section>
 
   <section class="slide">
-    <h1>use-cases are your application<span class="slide">,<br>Rails isn't</span></h1>
+    <h1>use-cases <strong>are</strong> your application<span class="slide">,<br>Rails isn't</span></h1>
   </section>
 
   <section class="slide">
@@ -822,65 +822,13 @@ sys 0m1.175s
         </a>
       </li>
       <li>
-        <h3>My almost defunct blog</h2>
+        <h3>My <em>almost defunct</em> blog</h2>
         <a href="http://szeryf.wordpress.com/">
           http://szeryf.wordpress.com/
         </a>
       </li>
     </div>
   </section>
-
-  <section class="slide">
-    <h1>CONS</h1>
-  </section>
-  <section class="slide">
-    <h2>text</h2>
-  </section>
-
-
-  <section class="slide" id="how-to-overview">
-    <h2>How to Make a Deck</h2>
-    <ol>
-      <li>
-        <h3>Write Slides</h3>
-
-        <p>Slide content is simple&nbsp;HTML.</p>
-      </li>
-      <li>
-        <h3>Choose Themes</h3>
-        <p>One for slide styles and one for deck&nbsp;transitions.</p>
-      </li>
-
-      <li>
-        <h3>Include Extensions</h3>
-        <p>Add extra functionality to your deck, or leave it stripped&nbsp;down.</p>
-      </li>
-    </ol>
-  </section>
-
-  <section class="slide" id="markup">
-    <h2>The Markup</h2>
-    <p>Slides are just HTML elements with a class of <code>slide</code>.</p>
-    <pre><code>&lt;section class=&quot;slide&quot;&gt;
-  &lt;h2&gt;How to Make a Deck&lt;/h2&gt;
-
-  &lt;ol&gt;
-    &lt;li&gt;
-      &lt;h3&gt;Write Slides&lt;/h3&gt;
-      &lt;p&gt;Slide content is simple HTML.&lt;/p&gt;
-    &lt;/li&gt;
-
-    &lt;li&gt;
-      &lt;h3&gt;Choose Themes&lt;/h3&gt;
-      &lt;p&gt;One for slide styles and one for deck transitions.&lt;/p&gt;
-    &lt;/li&gt;
-    &hellip;
-
-  &lt;/ol&gt;
-&lt;/section&gt;</code></pre>
-  </section>
-
-
 
   <form action="." method="get" class="goto-form">
   	<label for="goto-slide">Go to slide:</label>
