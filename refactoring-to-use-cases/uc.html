@@ -76,6 +76,9 @@
     a {
       font-family: monospace, sans-serif;
     }
+    /*code {
+          color: inherit !important;
+        }*/
   </style>
 </head>
 <body class="deck-container prettify">
@@ -567,7 +570,7 @@ end
   </section>
 
   <section class="slide">
-    <h2>#1 Role is sending notifications!</h2>
+    <h2>§1 Role is sending notifications!</h2>
     <textarea class="code" mode="ruby" style="display: none;" theme="night">
 after_create :notify_applicable_user, :unless => :accepted?
 
@@ -587,7 +590,7 @@ private
   </section>
 
   <section class="slide">
-    <h2>#2 Role is producing HTML!</h2>
+    <h2>§2 Role is producing HTML!</h2>
     <textarea class="code" mode="ruby" style="display: none;" theme="night">
 def notify_user
   path    = Rails.application.routes.url_helpers
@@ -609,7 +612,7 @@ end
   </section>
 
   <section class="slide">
-    <h2>#3 Role has a state machine</h2>
+    <h2>§3 Role has a state machine</h2>
     <textarea class="code" mode="ruby" style="display: none;" theme="night">
 state_machine :initial => :pending do
   state :pending, :accepted, :applied
@@ -635,7 +638,7 @@ end
   </section>
 
   <section class="slide">
-    <h2>#4 Role creates activity items</h2>
+    <h2>§4 Role creates activity items</h2>
     <textarea class="code" mode="ruby" style="display: none;" theme="night">
 def create_activity_item
   aid = ActivityItem.gen_aid
@@ -652,7 +655,7 @@ end
   </section>
 
   <section class="slide">
-    <h2>#5 Role creates some stuff</h2>
+    <h2>§5 Role creates some stuff</h2>
     <textarea class="code" mode="ruby" style="display: none;" theme="night">
 def self.create_roles(users, project)
   users.each do |user|
@@ -670,7 +673,12 @@ def self.create_owner(user, project)
                :state => 'accepted')
   project.create_activity_item
 end
+    </textarea>
+  </section>
 
+  <section class="slide">
+    <h2>§6 Role has security holes</h2>
+    <textarea class="code" mode="ruby" style="display: none;" theme="night">
 def self.create_follower(project, user)
   Role.create!(:user => user, :project => project, :role_type => 'follower',
                :state => 'accepted')
@@ -685,13 +693,23 @@ end
   </section>
 
   <section class="slide">
-    <h2>role.rb</h2>
+    <h2>§7 Role has backdoors</h2>
     <textarea class="code" mode="ruby" style="display: none;" theme="night">
+def change!(value)
+  update_attribute(:role_type, value)
+end
     </textarea>
   </section>
 
+  <section class="slide inverse">
+    <h1>
+      <img src="http://images2.wikia.nocookie.net/__cb20100124232940/fallout/images/c/c2/FB3_Psyker.jpg" class="opac6" width="250em">    
+      after
+    </h1>
+  </section>
+
   <section class="slide">
-    <h2>role.rb</h2>
+    <h2>role...</h2>
     <textarea class="code" mode="ruby" style="display: none;" theme="night">
     </textarea>
   </section>
