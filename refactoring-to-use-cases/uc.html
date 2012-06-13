@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
@@ -76,9 +76,13 @@
     a {
       font-family: monospace, sans-serif;
     }
-    /*code {
-          color: inherit !important;
-        }*/
+    code {
+      color: inherit !important;
+    }
+    section.slide pre u {
+      color: white;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body class="deck-container prettify">
@@ -709,14 +713,257 @@ end
   </section>
 
   <section class="slide">
-    <h2>role...</h2>
+    <h2>Project Membership Request</h2>
     <textarea class="code" mode="ruby" style="display: none;" theme="night">
+require 'dependency_injection.rb'
+require 'uses_transaction.rb'
+
+class ProjectMembershipRequest
+  include UsesTransaction
+  extend DependencyInjection
+
+  inject_dependency :notification_source, %q{ Message.public_method(:create_request_notification!) }
+  inject_dependency :rails_url_helper, %q{ Rails.application.routes.url_helpers }
+  inject_dependency :colleagueships_source, %q{ Colleagueship.public_method(:make_pair) }
+
+  def request project, user
+    unless project.users.include?(user)
+      in_transaction.call do
+        colleagueships_source.call(user, project.owner)
+        role = project.roles.create(user: user, state: Role::APPLIED, role_type: Role::APPLICANT)
+
+        path = rails_url_helper.accept_application_project_role_path(project, role)
+        subject = "#{user.name} would like to join your project called #{project.name}"
+        body = "To Accept <a href=\"/users/#{user.id}\">#{(user.name)}'s</a> application, <a href=\"#{path}\">click here</a>"
+        notification_source.call(subject, body, project.owner, role)
+      end
+    end
+  end
+end    </textarea>
+  </section>
+
+  <section class="slide">
+    <h2>Project Membership Acceptance</h2>
+    <textarea class="code" mode="ruby" style="display: none;" theme="night">
+class ProjectMembershipAcceptance
+  include UsesTransaction
+  include CreatesActivityItems
+
+  def accept role
+    return :already_accepted unless role.state == Role::APPLIED || role.state == Role::PENDING
+    return :colleagueship_not_accepted unless role.project.owner.colleagues.include?(role.user)
+    return :project_archived if role.project.archived?
+    in_transaction.call do
+      role.project.chapters.create(name: "#{role.project.name.titleize}'s Lab Book", lab_book: role.user.lab_book)
+      role.role_type = Role::MEMBER
+      role.state = Role::ACCEPTED
+      create_activity_item(role)
+      role.save!
+    end
+  end
+
+private
+  def create_activity_item role
+    # User has joined Project
+    ai1 = activity_item_source.call(subject: role.user, item: role, second_subject: role.project, description: "NEW")
+    # Project owner has welcomed new user
+    activity_item_source.call(subject: role.project.owner, item: role, second_subject: role.user, description: "WELCOME", activity_identifier: ai1.activity_identifier)
+  end
+end    </textarea>
+  </section>
+
+  <section class="slide">
+    <h1>how to use?</h1>
+  </section>
+
+  <section class="slide">
+    <h2>Roles Controller</h2>
+    <textarea class="code" mode="ruby" style="display: none;" theme="night">
+class RolesController < ApplicationController
+  def create
+    users_from_textboxlist = User.search_by_ids(params[:users_ids].split(/i*,i*/))
+    ProjectMembershipInvitation.new.invite(project, users_from_textboxlist)
+    redirect_to project, notice: 'Invitations have been sent.'
+  end
+
+  def accept
+    case ProjectMembershipAcceptance.new.accept(role)
+    when :already_accepted
+      redirect_to project, alert: "You have already accepted this invitation"
+    when :colleagueship_not_accepted
+      redirect_to project, notice: "You have to accept colleague invitation first."
+    when :project_archived
+      redirect_to project, notice: "You cannot join to archived project."
+    else
+      redirect_to project, notice: "You have been added to project called #{project.name}"
+    end
+  end
     </textarea>
   </section>
 
+  <section class="slide">
+    <h1>helpers</h1>
+  </section>
 
   <section class="slide">
-    <h1>PROS</h1>
+    <h2>Uses Transaction</h2>
+    <textarea class="code" mode="ruby" style="display: none;" theme="night">
+module UsesTransaction
+  attr_writer :in_transaction
+
+private
+  def in_transaction
+    @in_transaction ||= Project.public_method(:transaction)
+  end
+end    </textarea>
+  </section>
+
+  <section class="slide">
+    <h2>Creates Activity Items</h2>
+    <textarea class="code" mode="ruby" style="display: none;" theme="night">
+module CreatesActivityItems
+  attr_writer :activity_item_source
+
+private
+  def activity_item_source
+    @activity_item_source ||= ActivityItem.public_method(:create_item)
+  end
+end    </textarea>
+  </section>
+
+  <section class="slide">
+    <h2>Dependency Injection</h2>
+    <textarea class="code" mode="ruby" style="display: none;" theme="night">
+module DependencyInjection
+  def inject_dependency name, default
+    class_eval %Q{
+      attr_writer :#{name}
+      def #{name}
+        @#{name} ||= #{default}
+      end
+      private :#{name}
+    }
+  end
+end    </textarea>
+  </section>
+
+  <section class="slide">
+    <h1>how to test?</h1>
+  </section>
+
+  <section class="slide">
+    <h2>Project Membership Acceptance Test</h2>
+    <textarea class="code" mode="ruby" style="display: none;" theme="night">
+require_relative 'test_helper'
+require_relative '../../app/use-cases/project_membership_acceptance.rb'
+
+class ProjectMembershipAcceptanceTest < Test::Unit::TestCase
+
+  def setup
+    @lab_book = stub_everything('lab_book')
+    @user     = stub_everything('user', lab_book: @lab_book)
+    @owner    = stub_everything('owner', colleagues: [@user])
+    @project  = stub_everything('project', owner: @owner, name: stub(titleize: "Test"), chapters: stub_everything())
+    @role     = stub_everything('role', state: Role::PENDING, project: @project, user: @user, save!: true, accept!: true)
+
+    @activity_item = stub_everything('activity_item', activity_identifier: '123456')
+    @activity_item_source = stub_everything('activity_item_source', call: @activity_item)
+
+    @pma = ProjectMembershipAcceptance.new
+    @pma.in_transaction = ->(&blk){ @done_in_transaction = true; blk.call }
+    @pma.activity_item_source = @activity_item_source
+  end
+
+  def test_should_accept
+    @role.expects(:state=).with(Role::ACCEPTED)
+    @role.expects(:save!).returns(true)
+    assert_equal true, @pma.accept(@role)
+    assert @done_in_transaction, "should be done in transaction"
+  end
+
+  def test_should_not_accept_unless_pending
+    @role.expects(:state).returns(Role::ACCEPTED).twice
+    @role.expects(:save!).never
+    assert_equal :already_accepted, @pma.accept(@role)
+  end
+
+  def test_should_require_collegueship_to_be_accepted_first
+    @role.project.owner.colleagues.expects(:include?).with(@user).returns false
+    @role.expects(:save!).never
+    assert_equal :colleagueship_not_accepted, @pma.accept(@role)
+  end
+
+  def test_should_create_lab_book_chapter
+    @project.chapters.expects(:create).with(name: "Test's Lab Book", lab_book: @lab_book)
+    assert_equal true, @pma.accept(@role)
+  end
+
+  def test_should_create_activity_items
+    @activity_item_source.expects(:call).with(subject: @user, item: @role, second_subject: @project, description: "NEW").returns(@activity_item)
+    @activity_item_source.expects(:call).with(subject: @owner, item: @role, second_subject: @user, description: 'WELCOME', activity_identifier: '123456')
+    assert_equal true, @pma.accept(@role)
+  end
+
+end
+    </textarea>
+  </section>
+
+  <section class="slide">
+    <h2>Test Helper</h2>
+    <textarea class="code" mode="ruby" style="display: none;" theme="night">
+require 'test/unit'
+require 'mocha'
+
+unless defined? Role
+  class Role
+    APPLICANT = 'applicant'
+    MEMBER = 'member'
+    CREATOR = 'creator'
+    PENDING = 'pending'
+    APPLIED = 'applied'
+    ACCEPTED = 'accepted'
+  end
+end
+
+class NilClass
+  def blank?
+    true
+  end
+end    </textarea>
+  </section>
+
+  <section class="slide">
+    <h1>Y U NO <code>rake test</code>?</h1>
+  </section>
+
+  <section class="slide">
+    <h2>lib / tasks / tests.rake</h2>
+    <textarea class="code" mode="ruby" style="display: none;" theme="night">
+namespace :test do
+  Rake::TestTask.new(:usecases) do |t|
+    t.libs << 'test'
+    t.verbose = true
+    t.pattern = 'test/use-cases/**/*_test.rb'
+  end
+end
+Rake::Task['test:usecases'].comment = "Runs use cases tests"
+
+task "test" => ["test:usecases"]    </textarea>
+  </section>
+  
+  <section class="slide">
+    <h1>Y U NO <code>autotest</code>?</h1>
+  </section>
+
+  <section class="slide">
+    <h2>~/.autotest</h2>
+    <textarea class="code" mode="ruby" style="display: none;" theme="night">
+???
+    </textarea>
+  </section>
+  
+  <section class="slide">
+    <h1>pro's</h1>
   </section>
 
   <section class="slide">
@@ -808,7 +1055,7 @@ sys 0m1.175s
   </section>
 
   <section class="slide">
-    <h1>CONS</h1>
+    <h1>con's</h1>
   </section>
   <section class="slide">
     <h1>no Rails <strong>goodies</strong></h1>
@@ -849,7 +1096,7 @@ sys 0m1.175s
   </section>
 
   <form action="." method="get" class="goto-form">
-  	<label for="goto-slide">Go to slide:</label>
+    <label for="goto-slide">Go to slide:</label>
   	<input type="text" name="slidenum" id="goto-slide" list="goto-datalist">
   	<datalist id="goto-datalist"></datalist>
   	<input type="submit" value="Go">
