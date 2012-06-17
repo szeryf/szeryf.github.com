@@ -36,6 +36,9 @@
     .opac4 {
       opacity: 0.4;
     }
+    .opac2 {
+      opacity: 0.2;
+    }
     img.bg {
       /* Set rules to fill background */
       min-height: 100%;
@@ -63,7 +66,10 @@
     .slide.inverse {
       background-color: white;
     }
-    .slide.inverse h1 {
+    .slide.inverse h1,
+    .slide.inverse h2,
+    .slide.inverse h3,
+    .slide.inverse li {
       color: black;
       text-shadow: 0 0 10px #444;
     }
@@ -90,10 +96,10 @@
     <div class="vcenter">
       <h1>Refactoring to use-cases</h1>
       <h2>A case study</h2>
-      <h3 class="slide">or:<br> Use-cases&mdash;The Lost Years</h3>
+      <!--h3 class="slide">or:<br> Use-cases&mdash;The Lost Years</h3-->
       <br>
       <br>
-      <h4>Przemysław::Kowalczyk a.k.a. szeryf</h4>
+      <h4>Przemysław::Kowalczyk<br> a.k.a. szeryf</h4>
     </div>
   </section>
 
@@ -189,10 +195,17 @@
     </h1>
   </section>
 
+  <section class="slide inverse">
+    <h1>
+      <img src="http://images1.wikia.nocookie.net/__cb20110805222251/fallout/images/0/02/SwiftLearner.png" class="opac6" width="250em">
+      lack of cohesion
+    </h1>
+  </section>
+
   <section class="slide">
     <h1>
-      <img src="http://images4.wikia.nocookie.net/__cb20110122230241/fallout/images/5/5b/CaesarLegionReputation.png" class="opac6" width="400em">
-      cohesion
+      <img src="http://images2.wikia.nocookie.net/__cb20110406032438/fallout/images/b/b7/Fat_Man_icon.png" class="opac6" width="250em">
+      Single Responsibility Principle
     </h1>
   </section>
 
@@ -202,7 +215,13 @@
       class has <strong>exactly&nbsp;one</strong> reason to change
     </h1>
     <p>Robert C. Martin, <em>Agile Software Development, Principles, Patterns, and Practices</em></p>
-    
+  </section>
+
+  <section class="slide">
+    <h1>
+      <img src="http://images2.wikia.nocookie.net/__cb20110530153544/fallout/images/0/06/SingleShotVB.png" class="opac6" width="250em">
+      <code>AR<wbr>::<wbr>Base</code> already has a responsibility
+    </h1>
   </section>
 
   <section class="slide">
@@ -213,14 +232,15 @@
   </section>
 
   <section class="slide">
-    <img src="http://images.wikia.com/fallout/images/a/a7/Fallout_3_-_spawn_point_map.png" class="bg opac4">
-    <h1>In OOP, everything happens somewhere else</h1>
-    <p>Adele Goldberg</p>
+    <img src="http://images2.wikia.nocookie.net/__cb20120519154507/fallout/images/thumb/7/71/Art-vault_boy_gambler.jpg/620px-Art-vault_boy_gambler.jpg" class="vcenter opac4" height="100%">
+    <h1>Classes dictate methods of objects</h1>
   </section>
 
-  <section class="slide">
-    <img src="http://25.media.tumblr.com/tumblr_ljfdhvMAVA1qzs32ro1_500.jpg" class="vcenter opac4" width="640em">
-    <h1>A new hope</h1>
+  <section class="slide inverse">
+    <h1>
+      <img src="http://images2.wikia.nocookie.net/__cb20090903131624/fallout/images/e/eb/SHLDHOPE.gif" class="opac6">
+      A new hope
+    </h1>
   </section>
 
   <section class="slide">
@@ -228,7 +248,10 @@
   </section>
 
   <section class="slide">
-    <h2>Data</h2>
+    <h2>
+      <img src="http://images1.wikia.nocookie.net/__cb20110505234514/fallout/images/5/55/Icon_holotape.png" class="vcenter opac4" style="margin-left:600px" width="400px">
+      Data
+    </h2>
     <ul>
       <li class="slide">
         <h3>What the system <strong>is</strong></h3>
@@ -237,10 +260,10 @@
         <h3>Tends to be stable</h3>
       </li>
       <li class="slide">
-        <h3>Boring stuff</h3>
+        <h3>Boring stuff, dumb data-structures</h3>
       </li>
       <li class="slide">
-        <h3>Dumb data-structures, zero cleverness</h3>
+        <h3>No use-case specific methods</h3>
       </li>
       <li class="slide">
         <h3>Used in different contexts!</h3>
@@ -249,7 +272,8 @@
     </ul>
   </section>
 
-  <section class="slide">
+  <section class="slide inverse">
+    <img src="http://images1.wikia.nocookie.net/__cb20100119010727/fallout/images/e/e0/VB_DD12_deco_1.jpg" class="vcenter opac4" style="margin-left:600px" width="400px">
     <h2>Context</h2>
     <ul>
       <li class="slide">
@@ -266,6 +290,7 @@
   </section>
 
   <section class="slide">
+    <img src="http://images3.wikia.nocookie.net/__cb20110316010652/fallout/images/2/22/MathWrath.png" class="vcenter opac4" style="margin-left:600px" width="400px">
     <h2>Interaction</h2>
     <ul>
       <li class="slide">
@@ -357,7 +382,7 @@ end
   </section>
 
   <section class="slide">
-    <h2>Architecture according to Uncle Bob &ndash; cont.</h2>
+    <h2>Architecture according to Uncle Bob</h2>
     <ul>
       <li class="slide">
         <h3>Isolated layers</h3>
@@ -428,9 +453,11 @@ end
     </a>
   </section>
 
-  <section class="slide">
-    <img class="vcenter" src="http://25.media.tumblr.com/tumblr_ljfdhvMAVA1qzs32ro1_500.jpg" style="opacity:0.4;" width="630em">
-    <h1>A new hope</h1>
+  <section class="slide inverse">
+    <h1>
+      <img src="http://images2.wikia.nocookie.net/__cb20090903131624/fallout/images/e/eb/SHLDHOPE.gif" class="opac6">
+      A new hope
+    </h1>
   </section>
 
   <section class="slide">
@@ -455,6 +482,7 @@ end
       <em>caveat emptor:</em>
       <br>
       work in progress
+      <img src="http://images1.wikia.nocookie.net/__cb20101127012803/fallout/images/5/57/Nuclear_Anomaly.png" class="opac6" width="250em">
     </h1>
   </section>
 
@@ -590,10 +618,6 @@ private
   </section>
 
   <section class="slide">
-    <image class="vcenter" src="./20608737.jpg"/>
-  </section>
-
-  <section class="slide">
     <h2>§2 Role is producing HTML!</h2>
     <textarea class="code" mode="ruby" style="display: none;" theme="night">
 def notify_user
@@ -659,7 +683,7 @@ end
   </section>
 
   <section class="slide">
-    <h2>§5 Role creates some stuff</h2>
+    <h2>§5 Role creates roles</h2>
     <textarea class="code" mode="ruby" style="display: none;" theme="night">
 def self.create_roles(users, project)
   users.each do |user|
@@ -773,6 +797,49 @@ end    </textarea>
   </section>
 
   <section class="slide">
+    <h2>Plan Change</h2>
+    <textarea class="code" mode="ruby" style="display: none;" theme="night">
+class PlanChange
+  extend DependencyInjection
+  include UsesTransaction
+
+  inject_dependency :payments_proxy, %q{ PaymentsProxy.new }
+
+  def change user, plan_type, token
+    plan = user.plan
+    return :same_plan if token.nil? && plan.plan_type == plan_type
+    check_plan_limits(user, plan, plan_type)
+    in_transaction.call do
+      change_plan_for(user, plan, plan_type, token)
+    end
+  end
+
+private
+  def check_plan_limits user, plan, plan_type
+    if user.own_projects.only_private.count > plan_type.closed_project_limit
+      error "You own too many private projects for this plan."
+    elsif user.max_collaborators_in_any_closed_project > plan_type.colaborators_limit
+      error "The number of collaborators in at least one of your project exceeds this plan's limit."
+    end
+  end
+
+  def change_plan_for user, plan, plan_type, token
+    result = if plan.stripe_customer_token
+      handle_existing_customer(plan, plan_type, token)
+    else # no stripe_customer_token yet
+      handle_new_customer(user, plan, plan_type, token)
+    end
+    plan.plan_type = plan_type
+    plan.save!
+    return result
+  end
+    </textarea>
+  </section>
+  
+  
+  
+
+  <section class="slide">
     <h1>how to use?</h1>
   </section>
 
@@ -802,20 +869,41 @@ class RolesController < ApplicationController
   </section>
 
   <section class="slide">
-    <h1>helpers</h1>
+    <h2>Role</h2>
+    <textarea class="code" mode="ruby" style="display: none;" theme="night">
+class Role < ActiveRecord::Base
+  belongs_to :user
+  belongs_to :project
+
+  CREATOR    = 'creator'
+  MEMBER     = 'member'
+  SUPERVISOR = 'supervisor'
+  APPLICANT  = 'applicant'
+  validates :role_type, inclusion: [CREATOR, MEMBER, SUPERVISOR, APPLICANT]
+
+  PENDING  = 'pending'
+  APPLIED  = 'applied'
+  ACCEPTED = 'accepted'
+  validates :state, inclusion: [PENDING, APPLIED, ACCEPTED]
+
+  scope :of_type,  ->(type)  { where(role_type: type) }
+  scope :in_state, ->(state) { where(state: state) }
+  scope :for,      ->(user)  { where(user_id: user) }
+
+  def initialize *args
+    super
+    self.state ||= PENDING
+  end
+
+  def pending?
+    state == PENDING
+  end
+end
+    </textarea>
   </section>
 
   <section class="slide">
-    <h2>Uses Transaction</h2>
-    <textarea class="code" mode="ruby" style="display: none;" theme="night">
-module UsesTransaction
-  attr_writer :in_transaction
-
-private
-  def in_transaction
-    @in_transaction ||= Project.public_method(:transaction)
-  end
-end    </textarea>
+    <h1>helpers</h1>
   </section>
 
   <section class="slide">
@@ -827,6 +915,19 @@ module CreatesActivityItems
 private
   def activity_item_source
     @activity_item_source ||= ActivityItem.public_method(:create_item)
+  end
+end    </textarea>
+  </section>
+
+  <section class="slide">
+    <h2>Uses Transaction</h2>
+    <textarea class="code" mode="ruby" style="display: none;" theme="night">
+module UsesTransaction
+  attr_writer :in_transaction
+
+private
+  def in_transaction
+    @in_transaction ||= Project.public_method(:transaction)
   end
 end    </textarea>
   </section>
@@ -860,14 +961,14 @@ require_relative '../../app/use-cases/project_membership_acceptance.rb'
 class ProjectMembershipAcceptanceTest < Test::Unit::TestCase
 
   def setup
-    @lab_book = stub_everything('lab_book')
-    @user     = stub_everything('user', lab_book: @lab_book)
-    @owner    = stub_everything('owner', colleagues: [@user])
-    @project  = stub_everything('project', owner: @owner, name: stub(titleize: "Test"), chapters: stub_everything())
-    @role     = stub_everything('role', state: Role::PENDING, project: @project, user: @user, save!: true, accept!: true)
+    @lab_book = stub('lab_book')
+    @user     = stub('user', lab_book: @lab_book)
+    @owner    = stub('owner', colleagues: [@user])
+    @project  = stub('project', owner: @owner, name: stub(titleize: "Test"), chapters: stub())
+    @role     = stub('role', state: Role::PENDING, project: @project, user: @user, save!: true, accept!: true)
 
-    @activity_item = stub_everything('activity_item', activity_identifier: '123456')
-    @activity_item_source = stub_everything('activity_item_source', call: @activity_item)
+    @activity_item = stub('activity_item', activity_identifier: '123456')
+    @activity_item_source = stub('activity_item_source', call: @activity_item)
 
     @pma = ProjectMembershipAcceptance.new
     @pma.in_transaction = ->(&blk){ @done_in_transaction = true; blk.call }
@@ -937,7 +1038,7 @@ end    </textarea>
   </section>
 
   <section class="slide">
-    <h2>lib / tasks / tests.rake</h2>
+    <h2><code>lib/tasks/tests.rake</code></h2>
     <textarea class="code" mode="ruby" style="display: none;" theme="night">
 namespace :test do
   Rake::TestTask.new(:usecases) do |t|
@@ -956,22 +1057,42 @@ task "test" => ["test:usecases"]    </textarea>
   </section>
 
   <section class="slide">
-    <h2>~/.autotest</h2>
+    <h2><code>~/.autotest</code></h2>
     <textarea class="code" mode="ruby" style="display: none;" theme="night">
-???
+Autotest.add_hook :initialize do |at|
+  at.add_mapping %r[^app/use-cases/(.*)\.rb$] do |_, m|
+    at.files_matching %r%^test/use-cases/#{File.basename(m[1])}_test\.rb$%
+  end
+  at.add_mapping %r[^test/use-cases/.*.rb$] do |f, _|
+    f
+  end
+end
     </textarea>
   </section>
   
   <section class="slide">
-    <h1>pro's</h1>
+    <h1>
+      <img src="http://images2.wikia.nocookie.net/__cb20120516014008/fallout/images/9/9e/Pip_Boy_Alright.JPG" class="opac6" width="250em">
+      pros
+    </h1>
   </section>
 
-  <section class="slide">
-    <h1>use-cases easy to <strong>follow</strong></h1>
+  <section class="slide inverse">
+    <h1>
+      <img src="http://images.wikia.com/fallout/images/8/86/FB8_deco_3.png" width="250em">
+      use-cases easy to <strong>follow</strong>
+    </h1>
   </section>
 
   <section class="slide">
     <h1>easier to <strong>modify</strong></h1>
+  </section>
+
+  <section class="slide inverse">
+    <h1>
+      <img src="http://images3.wikia.nocookie.net/__cb20110212004824/fallout/images/thumb/6/69/Poll.png/116px-Poll.png" class="opac6" width="200em">
+      easier to <strong>reason</strong> about
+    </h1>
   </section>
 
   <section class="slide">
@@ -996,7 +1117,7 @@ Finished tests in 33.363820s, 4.8855 tests/s, 8.5422 assertions/s.
 
 real  0m51.735s
 user  0m43.616s
-sys 0m2.795s
+sys   0m2.795s
 </pre>
   </section>
 
@@ -1014,7 +1135,7 @@ Finished tests in <u>33.363820s</u>, 4.8855 tests/s, 8.5422 assertions/s.
 
 real  <u>0m51.735s</u>
 user  0m43.616s
-sys 0m2.795s
+sys   0m2.795s
 </pre>
   </section>
 
@@ -1032,7 +1153,7 @@ Finished tests in 0.081814s, 586.6967 tests/s, 1821.2042 assertions/s.
 
 real  0m6.375s
 user  0m5.115s
-sys 0m1.175s
+sys   0m1.175s
     </pre>
   </section>
 
@@ -1050,12 +1171,16 @@ Finished tests in <u>0.081814s</u>, 586.6967 tests/s, 1821.2042 assertions/s.
 
 real  <u>0m6.375s</u>
 user  0m5.115s
-sys 0m1.175s
+sys   0m1.175s
     </pre>
   </section>
 
   <section class="slide">
-    <h1>con's</h1>
+    <h1>easy to test <strong>all</strong> scenarios</h1>
+  </section>
+
+  <section class="slide">
+    <h1>cons</h1>
   </section>
   <section class="slide">
     <h1>no Rails <strong>goodies</strong></h1>
@@ -1092,6 +1217,7 @@ sys 0m1.175s
           http://szeryf.wordpress.com/
         </a>
       </li>
+      http://fallout.wikia.com/wiki/Fallout_Wiki
     </div>
   </section>
 
