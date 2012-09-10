@@ -18,8 +18,19 @@
   <script src="http://ligature-js.googlecode.com/files/ligature.js"></script>
 
   <style>
-    pre {
+    .slide pre {
       color:#af0;
+      font-size: 20px;
+    }
+    .slide pre.nowrap {
+      overflow: auto;
+      white-space: pre;
+    }
+    .deck-container .slide blockquote.smaller {
+      font-size: 1.4em;
+    }
+    .deck-container .slide blockquote.smaller p {
+      text-align: right;
     }
     .CodeMirror-gutter {
       display: none;
@@ -89,6 +100,9 @@
       color: white;
       font-weight: bold;
     }
+    .slide h2 small {
+      font-size: 50%;
+    }
   </style>
 </head>
 <body class="deck-container prettify">
@@ -108,7 +122,7 @@
   </section>
 
   <section class="slide">
-    <pre>
+    <pre class="nowrap">
 Usage: ruby [switches] [--] [programfile] [arguments]
   -0[octal]       specify record separator (\0, if no argument)
   -a              autosplit mode with -n or -p (splits $_ into $F)
@@ -149,33 +163,7 @@ Usage: ruby [switches] [--] [programfile] [arguments]
   </section>
 
   <section class="slide">
-    <pre style="width:44%;float:left; overflow: hidden">
-Usage: ruby [switches] [--] [programfile] [arguments]
-  -0[octal]       specify record separator (\0, if no argument)
-  -a              autosplit mode with -n or -p (splits $_ into $F)
-  -c              check syntax only
-  -Cdirectory     cd to directory, before executing your script
-  -d              set debugging flags (set $DEBUG to true)
-  -e 'command'    one line of script. Several -e's allowed. Omit [programfile]
-  -Eex[:in]       specify the default external and internal character encodings
-  -Fpattern       split() pattern for autosplit (-a)
-  -i[extension]   edit ARGV files in place (make backup if extension supplied)
-  -Idirectory     specify $LOAD_PATH directory (may be used more than once)
-  -l              enable line ending processing
-  -n              assume 'while gets(); ... end' loop around your script
-  -p              assume loop like -n but print line also like sed
-  -rlibrary       require the library, before executing your script
-  -s              enable some switch parsing for switches after script name
-  -S              look for the script using PATH environment variable
-  -T[level=1]     turn on tainting checks
-  -v              print version number, then turn on verbose mode
-  -w              turn warnings on for your script
-  -W[level=2]     set warning level; 0=silence, 1=medium, 2=verbose
-  -x[directory]   strip off text before #!ruby line and perhaps cd to directory
-  --copyright     print the copyright
-  --version       print the version
-    </pre>
-    <pre style="width:49%;float:left">
+    <pre class="nowrap">
 Usage: perl [switches] [--] [programfile] [arguments]
   -0[octal]         specify record separator (\0, if no argument)
   -a                autosplit mode with -n or -p (splits $_ into @F)
@@ -210,15 +198,78 @@ Usage: perl [switches] [--] [programfile] [arguments]
   </section>
 
   <section class="slide">
-    <h1>
-      Is Ruby influenced by Perl?
-    </h1>
+    <pre class="nowrap">
+Usage: perl [switches] [--] [programfile] [arguments]
+  <u>-0[octal]         specify record separator (\0, if no argument)</u>
+  <u>-a                autosplit mode with -n or -p (splits $_ into @F)</u>
+  -C[number/list]   enables the listed Unicode features
+  <u>-c                check syntax only (runs BEGIN and CHECK blocks)</u>
+  -d[:debugger]     run program under debugger
+  <u>-D[number/list]   set debugging flags (argument is a bit mask or alphabets)</u>
+  <u>-e program        one line of program (several -e's allowed, omit programfile)</u>
+  -E program        like -e, but enables all optional features
+  -f                don't do $sitelib/sitecustomize.pl at startup
+  <u>-F/pattern/       split() pattern for -a switch (//'s are optional)</u>
+  <u>-i[extension]     edit <> files in place (makes backup if extension supplied)</u>
+  <u>-Idirectory       specify @INC/#include directory (several -I's allowed)</u>
+  <u>-l[octal]         enable line ending processing, specifies line terminator</u>
+  -[mM][-]module    execute "use/no module..." before executing program
+  <u>-n                assume "while (<>) { ... }" loop around program</u>
+  <u>-p                assume loop like -n but print line also, like sed</u>
+  -P                run program through C preprocessor before compilation
+  <u>-s                enable rudimentary parsing for switches after programfile</u>
+  <u>-S                look for programfile using PATH environment variable</u>
+  -t                enable tainting warnings
+  <u>-T                enable tainting checks</u>
+  -u                dump core after parsing program
+  -U                allow unsafe operations
+  <u>-v                print version, subversion (includes VERY IMPORTANT perl info)</u>
+  -V[:variable]     print configuration summary (or a single Config.pm variable)
+  <u>-w                enable many useful warnings (RECOMMENDED)</u>
+  <u>-W                enable all warnings</u>
+  <u>-x[directory]     strip off text before #!perl line and perhaps cd to directory</u>
+  -X                disable all warnings
+    </pre>
   </section>
 
   <section class="slide">
-    <h1>
-     I wanted a scripting language that was more powerful than Perl, and more object-oriented than Python. (...) Ruby's class library is an object-oriented reorganization of Perl functionality--plus some Smalltalk and Lisp stuff.
-    </h1>
+    <pre class="nowrap">
+Usage: ruby [switches] [--] [programfile] [arguments]
+  <u>-0[octal]       specify record separator (\0, if no argument)</u>
+  <u>-a              autosplit mode with -n or -p (splits $_ into $F)</u>
+  <u>-c              check syntax only</u>
+  -Cdirectory     cd to directory, before executing your script
+  <u>-d              set debugging flags (set $DEBUG to true)</u>
+  <u>-e 'command'    one line of script. Several -e's allowed. Omit [programfile]</u>
+  -Eex[:in]       specify the default external and internal character encodings
+  <u>-Fpattern       split() pattern for autosplit (-a)</u>
+  <u>-i[extension]   edit ARGV files in place (make backup if extension supplied)</u>
+  <u>-Idirectory     specify $LOAD_PATH directory (may be used more than once)</u>
+  <u>-l              enable line ending processing</u>
+  <u>-n              assume 'while gets(); ... end' loop around your script</u>
+  <u>-p              assume loop like -n but print line also like sed</u>
+  -rlibrary       require the library, before executing your script
+  <u>-s              enable some switch parsing for switches after script name</u>
+  <u>-S              look for the script using PATH environment variable</u>
+  <u>-T[level=1]     turn on tainting checks</u>
+  <u>-v              print version number, then turn on verbose mode</u>
+  <u>-w              turn warnings on for your script</u>
+  -W[level=2]     set warning level; 0=silence, 1=medium, 2=verbose
+  <u>-x[directory]   strip off text before #!ruby line and perhaps cd to directory</u>
+  --copyright     print the copyright
+  --version       print the version
+    </pre>
+  </section>
+
+  <section class="slide">
+    <h2>
+      Is Ruby influenced by Perl?
+    </h2>
+    <blockquote class="smaller" >
+      <p>I wanted a scripting language that was more powerful than Perl, and more object-oriented than Python. (...)</p>
+      <p>Ruby's class library is an object-oriented reorganization of Perl functionality--plus some Smalltalk and Lisp stuff.</p>
+      <p><cite>Yukihiro Matsumoto a.k.a. "Matz"</cite></p>
+    </blockquote>
   </section>
 
   <section class="slide">
@@ -235,16 +286,19 @@ Usage: perl [switches] [--] [programfile] [arguments]
       <br>
       <code>ruby -v</code>
     </h2>
-    <pre>
+    <textarea class="code" mode="ruby" style="display: none;" theme="night">
 $ cat version.rb 
 puts RUBY_VERSION
+
 $ ruby version.rb 
 1.9.3
+
 $ ruby --version
 ruby 1.9.3p125 (2012-02-16 revision 34643) [x86_64-darwin10.8.0]
+
 $ ruby -v
 ruby 1.9.3p125 (2012-02-16 revision 34643) [x86_64-darwin10.8.0]
-    </pre>
+    </textarea>
   </section>
 
   <section class="slide">
@@ -253,25 +307,28 @@ ruby 1.9.3p125 (2012-02-16 revision 34643) [x86_64-darwin10.8.0]
       <br>
       <code>ruby -w</code>
     </h2>
-    <pre>
+    <textarea class="code" mode="ruby" style="display: none;" theme="night">
 $ cat warnings.rb 
 a = 1
 3.times {|a| 
   puts (a)
 }
+
 $ ruby -c warnings.rb 
 Syntax OK
+
 $ ruby -cw warnings.rb 
 warnings.rb:2: warning: shadowing outer local variable - a
 warnings.rb:3: warning: (...) interpreted as grouped expression
 Syntax OK
+
 $ ruby -w warnings.rb 
 warnings.rb:2: warning: shadowing outer local variable - a
 warnings.rb:3: warning: (...) interpreted as grouped expression
 0
 1
 2
-    </pre>
+    </textarea>
   </section>
 
   <section class="slide">
@@ -280,17 +337,259 @@ warnings.rb:3: warning: (...) interpreted as grouped expression
     </h1>
   </section>
 
-
   <section class="slide">
     <h2>
       <code>ruby -e 'command'</code>
-      <br> ---  one line of script. Several -e's allowed. Omit [programfile]
+      <br><small>one line of script. Several -e's allowed. Omit [programfile]</small>
     </h2>
-    <pre>
+    <textarea class="code" mode="ruby" style="display: none;" theme="night">
 $ ruby -e 'f=[0,1];48.times{f&lt;&lt;f[-1]+f[-2]};p f'
-[0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181, 6765, 10946, 17711, 28657, 46368, 75025, 121393, 196418, 317811, 514229, 832040, 1346269, 2178309, 3524578, 5702887, 9227465, 14930352, 24157817, 39088169, 63245986, 102334155, 165580141, 267914296, 433494437, 701408733, 1134903170, 1836311903, 2971215073, 4807526976, 7778742049]    
-    </pre>
+[0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 
+1597, 2584, 4181, 6765, 10946, 17711, 28657, 46368, 75025, 121393, 
+196418, 317811, 514229, 832040, 1346269, 2178309, 3524578, 5702887, 
+9227465, 14930352, 24157817, 39088169, 63245986, 102334155, 165580141, 
+267914296, 433494437, 701408733, 1134903170, 1836311903, 2971215073, 
+4807526976, 7778742049]    
+    </textarea>
   </section>
+
+  <section class="slide">
+    <h2>
+      <code>ruby -Idirectory</code>
+      <br>
+      <small>specify $LOAD_PATH directory (may be used more than once)</small>
+      <br>
+      <code>ruby -rlibrary</code>
+      <br>
+      <small>require the library, before executing your script</small>
+    </h2>
+    <textarea class="code" mode="ruby" style="display: none;" theme="night">
+ruby -I.:lib:test -rubygems -e 
+  "%w[test/unit test/unit/project_test.rb].each { |f| require f }"
+    </textarea>
+  </section>
+
+  <section class="slide">
+    <h1>
+      Fun fact #1:<br>
+     <code>require 'ubygems'</code> actually works!
+    </h1>
+  </section>
+
+  <section class="slide">
+    <h2>
+      <code>ruby -s</code>
+      <small>enable some switch parsing for switches after script name (does not work with <code>-e</code>)</small>
+    </h2>
+    <textarea class="code" mode="ruby" style="display: none;" theme="night">
+$ cat s-opt.rb 
+#!ruby -s
+p xyz: $xyz
+p val: $val
+p i_can_haz_hyphens: $i_can_haz_hyphens
+p ARGV: ARGV
+
+$ ruby ./s-opt.rb -xyz -val=123 -i-can-haz-hyphens
+{:xyz=>true}
+{:val=>"123"}
+{:i_can_haz_hyphens=>true}
+{:ARGV=>[]}
+
+$ ruby ./s-opt.rb -&zwj;- -xyz -val=123 -i-can-haz-hyphens
+{:xyz=>nil}
+{:val=>nil}
+{:i_can_haz_hyphens=>nil}
+{:ARGV=>["-xyz", "-val=123", "-i-can-haz-hyphens"]}
+    </textarea>
+  </section>
+
+  <section class="slide">
+    <h2>
+      Might be actualy useful...
+      <code>my-script.rb -verbose</code>
+    </h2>
+    <textarea class="code" mode="ruby" style="display: none;" theme="night">
+#!ruby -s
+
+log "...." if $verbose
+</textarea>
+  </section>
+
+  <section class="slide">
+    <h2>
+      <code>ruby -Cdirectory</code>
+      <small>cd to directory, before executing your script</small>
+    </h2>
+    <textarea class="code" mode="ruby" style="display: none;" theme="night">
+$ ls
+src/  lib/  doc/  ext/
+
+$ for x in */ ; do ruby -C$x clean.rb ; done
+src-cleaning /path/to/src/
+lib-cleaning /path/to/lib/
+doc-cleaning /path/to/doc/
+ext-cleaning /path/to/ext/
+
+$ for x in */ ; do ruby -C$x /path/to/clean.rb ; done
+cleaning /path/to/src/
+cleaning /path/to/lib/
+cleaning /path/to/doc/
+cleaning /path/to/ext/
+</textarea>
+  </section>
+
+  <section class="slide">
+    <h2>
+      <code>ruby -n</code>
+      <small>assume 'while gets(); ... end' loop around your script</small>
+    </h2>
+    <textarea class="code" mode="ruby" style="display: none;" theme="night">
+$ ruby -ne 'print if $..even?' < s-opt.rb
+p xyz: $xyz
+p i_can_haz_hyphens: $i_can_haz_hyphens
+
+$ ruby -ne 'print if /xyz/' s-opt.rb 
+p xyz: $xyz
+    </textarea>
+  </section>
+
+  <section class="slide">
+    <h2>
+      How does it work?
+    </h2>
+<textarea class="code" mode="ruby" style="display: none;" theme="night">
+$ ruby -ne 'print if $..even?' s-opt.rb
+</textarea>
+<p class="slide">
+becomes
+<textarea class="code" mode="ruby" style="display: none;" theme="night">
+while gets
+  print if $..even?
+end
+</textarea>
+</p><p class="slide">
+which is equivalent to
+<textarea class="code" mode="ruby" style="display: none;" theme="night">
+input = ARGV.empty? ? STDIN : read_all_args_as_files
+$. = 0
+while $_ = gets(input)
+  line_no += 1
+  print $_ if $..even?
+end</textarea>
+</p>
+  </section>
+
+  <section class="slide">
+    <h2>
+      <code>ruby -p</code>
+      <small>assume loop like -n but print line also like sed</small>
+    </h2>
+<textarea class="code" mode="ruby" style="display: none;" theme="night">
+$ cat s-opt.rb 
+#!ruby -s
+p xyz: $xyz
+p val: $val
+p i_can_haz_hyphens: $i_can_haz_hyphens
+p ARGV: ARGV
+
+$ ruby -pe 'gsub(/(\w+):/) { ":#{$1} =>" }' s-opt.rb
+#!ruby -s
+p :xyz => $xyz
+p :val => $val
+p :i_can_haz_hyphens => $i_can_haz_hyphens
+p :ARGV => ARGV</textarea>
+  </section>
+
+  <section class="slide">
+    <h2>
+      How does it work?
+    </h2>
+<textarea class="code" mode="ruby" style="display: none;" theme="night">
+$ ruby -pe 'gsub(/(\w+):/) { ":#{$1} =>" }' s-opt.rb</textarea>
+becomes
+<textarea class="code" mode="ruby" style="display: none;" theme="night">
+while $_ = gets
+  $_ = $_.gsub(/(\w+):/) { ":#{$1} =>" }
+  print $_
+end</textarea>
+* <code>gsub(...){...}</code> does not work with <code>-n</code> on Ruby MRI 1.9.3, works on 1.8.7
+  </section>
+
+  <section class="slide">
+    <h2>
+      More examples
+    </h2>
+<textarea class="code" mode="ruby" style="display: none;" theme="night">
+$ ruby -pe puts file.txt</textarea>
+<div class='slide'>Inserts empty line before each line
+<br><br>
+<textarea class="code" mode="ruby" style="display: none;" theme="night">
+$ ruby -pe '$\="\n"' file.txt</textarea>
+<div class='slide'>Inserts empty line after each line
+<br><br>
+<textarea class="code" mode="ruby" style="display: none;" theme="night">
+$ ruby -pe 'gsub(/\s+$/, $/)' file.txt  </textarea>
+<div class='slide'>Strip trailing whitespace from each line
+<br><br>
+<textarea class="code" mode="ruby" style="display: none;" theme="night">
+$ ruby -pe 'exit if $. > 10' file.txt  </textarea>
+<div class='slide'>Print first 10 lines of file.
+</div>
+</div>
+</div>
+</div>
+
+  </section>
+
+  <section class="slide">
+    <h2>
+      Even more examples
+    </h2>
+<textarea class="code" mode="ruby" style="display: none;" theme="night">
+$ ruby -ne 'print if /xyz/../haz/' s-opt.rb 
+p xyz: $xyz
+p val: $val
+p i_can_haz_hyphens: $i_can_haz_hyphens</textarea>
+<div class='slide'>Print lines between line containing <code>xyz</code> and line containing <code>haz</code>
+<br><br>
+<textarea class="code" mode="ruby" style="display: none;" theme="night">
+$ ruby -pe '$_.tr!"a-zA-Z","n-za-mN-ZA-M"' s-opt.rb 
+#!ehol -f
+c klm: $klm
+c iny: $iny
+c v_pna_unm_ulcuraf: $v_pna_unm_ulcuraf
+c NETI: NETI
+</textarea>
+<div class='slide'>ROT13 like a (Ruby) boss!
+</div>
+</div>
+  </section>
+
+  <section class="slide">
+    <h2>
+      <code>ruby -l</code>
+      <small>enable line ending processing</small>
+    </h2>
+<textarea class="code" mode="c" style="display: none;" theme="night">
+case 'l':
+  if (envopt) goto noenvopt;
+  opt->do_line = TRUE;
+  rb_output_rs = rb_rs;
+  s++;
+  goto reswitch;</textarea>
+
+<textarea class="code" mode="c" style="display: none;" theme="night">
+if (opt->do_loop) {
+  PREPARE_PARSE_MAIN({
+    tree = rb_parser_while_loop(parser, tree, opt->do_line, opt->do_split);
+  });
+  rb_define_global_function("sub", rb_f_sub, -1);
+  rb_define_global_function("gsub", rb_f_gsub, -1);
+  rb_define_global_function("chop", rb_f_chop, 0);
+  rb_define_global_function("chomp", rb_f_chomp, -1);
+}</textarea>
+  </section>
+
 
 
   <section class="slide">
