@@ -63,6 +63,7 @@
       position: fixed;
       top: 0;
       left: 0;
+      z-index: -100;
     }
 
     @media screen and (max-width: 1024px) { /* Specific to this particular image */
@@ -96,6 +97,15 @@
     code {
       color: inherit !important;
     }
+    code.flickr {
+      font-size: 50%;
+      text-shadow: 0 0 5px #000;
+      position:fixed;
+      left:0px;
+      bottom:0px;
+      height:30px;
+      width:100%;
+    }
     section.slide pre u {
       color: white;
       font-weight: bold;
@@ -117,7 +127,7 @@
 
   <section class="slide">
     <h1>
-      ruby --help
+      ruby -&zwj;-help
     </h1>
   </section>
 
@@ -152,13 +162,7 @@ Usage: ruby [switches] [--] [programfile] [arguments]
 
   <section class="slide">
     <h1>
-      lots of cryptic options
-    </h1>
-  </section>
-
-  <section class="slide">
-    <h1>
-      ...but looks familiar
+      lots of cryptic options<span class="slide"><br>...but some look familiar</span>
     </h1>
   </section>
 
@@ -272,10 +276,10 @@ Usage: ruby [switches] [--] [programfile] [arguments]
     </blockquote>
   </section>
 
-  <section class="slide">
+  <section class="slide inverse">
+    <img class="bg" src="http://farm7.staticflickr.com/6074/6064652520_bf51620dcf_b_d.jpg" style="top:-200px;">
+    <code class='flickr'>http://www.flickr.com/photos/32513189@N03/6064652520</code>
     <h1>
-      Part I:
-      <br>
       basic options
     </h1>
   </section>
@@ -293,7 +297,7 @@ puts RUBY_VERSION
 $ ruby version.rb 
 1.9.3
 
-$ ruby --version
+$ ruby -&zwj;-version
 ruby 1.9.3p125 (2012-02-16 revision 34643) [x86_64-darwin10.8.0]
 
 $ ruby -v
@@ -333,7 +337,15 @@ warnings.rb:3: warning: (...) interpreted as grouped expression
 
   <section class="slide">
     <h1>
-      TextMate's Ruby bundle runs<br> <code>ruby -cw</code><br> on save
+      <small>TextMate's Ruby bundle runs<br> <code>ruby -cw</code><br> on save</small>
+    </h1>
+  </section>
+
+  <section class="slide inverse">
+    <img class="bg" src="http://farm2.staticflickr.com/1060/1398914855_46aa8ccdb9_b_d.jpg" style="top:-200px;">
+    <code class='flickr'>http://www.flickr.com/photos/kenb/1398914855</code>
+    <h1>
+      slightly advanced options
     </h1>
   </section>
 
@@ -343,14 +355,8 @@ warnings.rb:3: warning: (...) interpreted as grouped expression
       <br><small>one line of script. Several -e's allowed. Omit [programfile]</small>
     </h2>
     <textarea class="code" mode="ruby" style="display: none;" theme="night">
-$ ruby -e 'f=[0,1];48.times{f&lt;&lt;f[-1]+f[-2]};p f'
-[0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 
-1597, 2584, 4181, 6765, 10946, 17711, 28657, 46368, 75025, 121393, 
-196418, 317811, 514229, 832040, 1346269, 2178309, 3524578, 5702887, 
-9227465, 14930352, 24157817, 39088169, 63245986, 102334155, 165580141, 
-267914296, 433494437, 701408733, 1134903170, 1836311903, 2971215073, 
-4807526976, 7778742049]    
-    </textarea>
+$ ruby -e 'f=[0,1];15.times{f&lt;&lt;f[-1]+f[-2]};p f'
+[0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987]</textarea>
   </section>
 
   <section class="slide">
@@ -364,15 +370,26 @@ $ ruby -e 'f=[0,1];48.times{f&lt;&lt;f[-1]+f[-2]};p f'
       <small>require the library, before executing your script</small>
     </h2>
     <textarea class="code" mode="ruby" style="display: none;" theme="night">
-ruby -I.:lib:test -rubygems -e 
+$ ruby -I.:lib:test -rubygems -e \
   "%w[test/unit test/unit/project_test.rb].each { |f| require f }"
+  
+$ ruby -I.:lib:test -rubygems \
+  -rtest/unit -rtest/unit/project_test.rb -e ''
     </textarea>
   </section>
 
   <section class="slide">
     <h1>
-      Fun fact #1:<br>
-     <code>require 'ubygems'</code> actually works!
+      <small><strong>Fun fact #1:</strong><br>
+      <code>require 'ubygems'</code> actually works!</small>
+    </h1>
+  </section>
+
+  <section class="slide inverse">
+    <img class="bg" src="http://farm2.staticflickr.com/1328/865858309_5c0f52dad1_b_d.jpg" style="opacity:0.95 !important">
+    <code class='flickr'>http://www.flickr.com/photos/andrewdewolfe/865858309</code>
+    <h1>
+      moderately convoluted options
     </h1>
   </section>
 
@@ -395,23 +412,22 @@ $ ruby ./s-opt.rb -xyz -val=123 -i-can-haz-hyphens
 {:i_can_haz_hyphens=>true}
 {:ARGV=>[]}
 
-$ ruby ./s-opt.rb -&zwj;- -xyz -val=123 -i-can-haz-hyphens
-{:xyz=>nil}
+$ ruby ./s-opt.rb -xyz -&zwj;- -val=123 -i-can-haz-hyphens
+{:xyz=>true}
 {:val=>nil}
 {:i_can_haz_hyphens=>nil}
-{:ARGV=>["-xyz", "-val=123", "-i-can-haz-hyphens"]}
-    </textarea>
+{:ARGV=>["-val=123", "-i-can-haz-hyphens"]}    </textarea>
   </section>
 
   <section class="slide">
     <h2>
-      Might be actualy useful...
+      Might be actually useful...
       <code>my-script.rb -verbose</code>
     </h2>
     <textarea class="code" mode="ruby" style="display: none;" theme="night">
 #!ruby -s
 
-log "...." if $verbose
+log "some message" if $verbose
 </textarea>
   </section>
 
@@ -436,6 +452,14 @@ cleaning /path/to/lib/
 cleaning /path/to/doc/
 cleaning /path/to/ext/
 </textarea>
+  </section>
+
+  <section class="slide inverse">
+    <img class="bg" src="http://farm5.staticflickr.com/4116/4895929410_916beccd16_b_d.jpg" style="top:-150px">
+    <code class='flickr'>http://www.flickr.com/photos/alykat/4895929410</code>
+    <h1 class="whiteshadow">
+      higher driving school
+    </h1>
   </section>
 
   <section class="slide">
@@ -470,10 +494,10 @@ end
 </p><p class="slide">
 which is equivalent to
 <textarea class="code" mode="ruby" style="display: none;" theme="night">
-input = ARGV.empty? ? STDIN : read_all_args_as_files
+ARGF = ARGV.empty? ? STDIN : read_all_args_as_one_stream
 $. = 0
-while $_ = gets(input)
-  line_no += 1
+while $_ = gets(ARGF)
+  $. += 1
   print $_ if $..even?
 end</textarea>
 </p>
@@ -516,6 +540,12 @@ end</textarea>
   </section>
 
   <section class="slide">
+    <h1>
+      <small>Ruby defines special versions of <code>chomp</code>, <code>chop</code>, <code>gsub</code>, <code>sub</code> in loop mode</small>
+    </h1>
+  </section>
+
+  <section class="slide">
     <h2>
       More examples
     </h2>
@@ -545,12 +575,12 @@ $ ruby -pe 'exit if $. > 10' file.txt  </textarea>
     <h2>
       Even more examples
     </h2>
-<textarea class="code" mode="ruby" style="display: none;" theme="night">
-$ ruby -ne 'print if /xyz/../haz/' s-opt.rb 
-p xyz: $xyz
-p val: $val
-p i_can_haz_hyphens: $i_can_haz_hyphens</textarea>
-<div class='slide'>Print lines between line containing <code>xyz</code> and line containing <code>haz</code>
+<textarea class="code" mode="ruby" style="display: none;" theme="night">$ ruby -ne 'print if /<body>/../<\/body>/' index.html 
+  <body>
+    <a href="refactoring-to-use-cases/uc.html">Refactoring to use-cases</a>
+    <a href="ruby-command-line/ruby.html">Ruby command line</a>
+  </body></textarea>
+<div class='slide'>Print lines between line containing <code>&lt;body></code> and line containing <code>&lt;/body></code>
 <br><br>
 <textarea class="code" mode="ruby" style="display: none;" theme="night">
 $ ruby -pe '$_.tr!"a-zA-Z","n-za-mN-ZA-M"' s-opt.rb 
@@ -570,1143 +600,251 @@ c NETI: NETI
       <code>ruby -l</code>
       <small>enable line ending processing</small>
     </h2>
-<textarea class="code" mode="c" style="display: none;" theme="night">
-case 'l':
-  if (envopt) goto noenvopt;
-  opt->do_line = TRUE;
-  rb_output_rs = rb_rs;
-  s++;
-  goto reswitch;</textarea>
+<textarea class="code" mode="ruby" style="display: none;" theme="night">
+$ ruby -pe '$_.reverse!' s-opt.rb 
 
-<textarea class="code" mode="c" style="display: none;" theme="night">
-if (opt->do_loop) {
-  PREPARE_PARSE_MAIN({
-    tree = rb_parser_while_loop(parser, tree, opt->do_line, opt->do_split);
-  });
-  rb_define_global_function("sub", rb_f_sub, -1);
-  rb_define_global_function("gsub", rb_f_gsub, -1);
-  rb_define_global_function("chop", rb_f_chop, 0);
-  rb_define_global_function("chomp", rb_f_chomp, -1);
-}</textarea>
-  </section>
-
-
-
-  <section class="slide">
-    <h2>Table of contents</h2>
-    <ol>
-      <li>
-        <h3>The traditional way</h3>
-        <p>MVC considered harmful?!</p>
-      </li>
-      <li>
-        <h3>The new way</h3>
-        <p>DCI, Objects on Rails, Use-cases...</p>
-      </li>
-      <li>
-        <h3>Case-study</h3>
-        <p>Code or it didn't happen...</p>
-      </li>
-    </ol>
+s- ybur!#
+zyx$ :zyx p
+lav$ :lav p
+snehpyh_zah_nac_i$ :snehpyh_zah_nac_i p
+VGRA :VGRA p$
+$ ruby -lpe '$_.reverse!' s-opt.rb 
+s- ybur!#
+zyx$ :zyx p
+lav$ :lav p
+snehpyh_zah_nac_i$ :snehpyh_zah_nac_i p
+VGRA :VGRA p</textarea>
   </section>
 
   <section class="slide inverse">
-    <h1>
-      <img src="http://images.wikia.com/fallout/images/b/bc/Vault_Boy.png" >
-      the traditional way
-    </h1>
-  </section>
-
-  <section class="slide">
-    <h1>
-      MVC
-      <span class="slide">
-        <br>
-        considered <strong>harmful?</strong>
-        <img src="http://images4.wikia.nocookie.net/__cb20120515012304/fallout/images/1/1b/Pip_Boy_Bullseye.JPG" width="250em">
-      </span>
-    </h1>
-  </section>
-
-  <section class="slide inverse">
-    <h1>
-      <img src="http://images1.wikia.nocookie.net/__cb20091116174712/fallout/images/5/5d/Jinxed.png" style="opacity:1;" width="250em">
-      Rails made me do it
-    </h1>
-  </section>
-
-  <section class="slide inverse">
-    <img class="vcenter" src="http://www.ayearwithoutcandy.com/wp-content/uploads/2010/10/fat-skinny2.jpg">
-    <p>Jamis Buck, 2006</p>
-  </section>
-
-  <section class="slide inverse">
-    <img class="vcenter opac6" src="http://pu.i.wp.pl/k,NjcwMjA5MzQsNDY0MjkwNzk=,f,fat-girls-and-fries.jpg">
+    <img class="bg" src="http://upload.wikimedia.org/wikipedia/commons/f/f3/Ost%C5%99ihom%2C_Kerekt%C3%B3%2C_turistick%C3%BD_rozcestn%C3%ADk.JPG" style="top:-200px">
+    <code class='flickr'>source:wikipedia</code>
     <h1 class="whiteshadow">
-      <strong>obese</strong> model,
-      <br>
-      not so <strong>skinny</strong> controller
+      ninjas only
     </h1>
-  </section>
-
-  <section class="slide">
-    <h1>
-      <img src="http://images.wikia.com/fallout/images/c/cd/Mad_Bomber_perk.png" class="opac6" width="250em">
-      there's <strong>more</strong> than <em>Model, View &amp; Controller</em>
-    </h1>
-  </section>
-
-  <section class="slide inverse">
-    <h1>
-      <img src="http://images.wikia.com/fallout/images/8/86/FB8_deco_3.png" width="250em">
-      MVC makes use-cases difficult to <strong>read</strong>
-    </h1>
-  </section>
-
-  <section class="slide">
-    <h1>
-      <img src="http://images.wikia.com/fallout/images/7/7b/Bloody_Mess_FO3.png" class="opac6" width="400em">
-      use-case spread over <strong>many</strong> files
-    </h1>
-  </section>
-
-  <section class="slide">
-    <h1>
-      shotgun surgery
-      <img src="http://images4.wikia.nocookie.net/__cb20101012145040/fallout/images/0/08/ShotgunSurgeon.png" class="opac6">
-    </h1>
-  </section>
-
-  <section class="slide inverse">
-    <h1>
-      <img src="http://images1.wikia.nocookie.net/__cb20110805222251/fallout/images/0/02/SwiftLearner.png" class="opac6" width="250em">
-      lack of cohesion
-    </h1>
-  </section>
-
-  <section class="slide">
-    <h1>
-      <img src="http://images2.wikia.nocookie.net/__cb20110406032438/fallout/images/b/b7/Fat_Man_icon.png" class="opac6" width="250em">
-      Single Responsibility Principle
-    </h1>
-  </section>
-
-  <section class="slide inverse">
-    <h1>
-      <img src="http://images.wikia.com/fallout/images/e/e9/Beta_Software.png" class="opac6" width="250em">
-      class has <strong>exactly&nbsp;one</strong> reason to change
-    </h1>
-    <p>Robert C. Martin, <em>Agile Software Development, Principles, Patterns, and Practices</em></p>
-  </section>
-
-  <section class="slide">
-    <h1>
-      <img src="http://images2.wikia.nocookie.net/__cb20110530153544/fallout/images/0/06/SingleShotVB.png" class="opac6" width="250em">
-      <code>AR<wbr>::<wbr>Base</code> already has a responsibility
-    </h1>
-  </section>
-
-  <section class="slide">
-    <img src="http://images4.wikia.nocookie.net/__cb20090903122023/fallout/images/e/eb/VaultComputer.png" class="vcenter opac4" height="100%">
-    <h1>
-      OOP makes use-cases difficult to <strong>read</strong>
-    </h1>
-  </section>
-
-  <section class="slide inverse">
-    <h1>
-      <img src="http://images3.wikia.nocookie.net/__cb20050714001117/fallout/images/0/0c/Damage.gif" width="250em" >
-      Classes dictate methods of objects
-    </h1>
-  </section>
-
-  <section class="slide inverse">
-    <h1>
-      <img src="http://images2.wikia.nocookie.net/__cb20090903131624/fallout/images/e/eb/SHLDHOPE.gif" class="opac6">
-      A new hope
-    </h1>
-  </section>
-
-  <section class="slide">
-    <h1>Data<br>Context<br>Interaction</h1>
   </section>
 
   <section class="slide">
     <h2>
-      <img src="http://images1.wikia.nocookie.net/__cb20110505234514/fallout/images/5/55/Icon_holotape.png" class="vcenter opac4" style="margin-left:600px" width="400px">
-      Data
+      <code>ruby -a</code>
+      <small>autosplit mode with -n or -p (splits $_ into $F)</small>
+    </h2>
+<textarea class="code" mode="ruby" style="display: none;" theme="night">
+$ ruby -nae 'puts $F[1] if $F[0]=="127.0.0.1"' /etc/hosts
+localhost
+local.dev
+backend.dev
+frontend.dev</textarea>
+  </section>
+
+  <section class="slide">
+    <h2>
+      <code>ruby -Fpattern</code>
+      <small>split() pattern for autosplit&nbsp;(-a)</small>
+    </h2>
+<textarea class="code" mode="ruby" style="display: none;" theme="night">
+$ ruby -naF: -e 'puts $F[0] if $F[4]=~/server/i' /etc/passwd 
+_postfix
+_pcastserver
+_www
+_cvs
+_svn
+_mysql</textarea>
+  </section>
+
+  <section class="slide">
+    <h2>
+      <code>BEGIN</code> &amp; <code>END</code> blocks
+    </h2>
+<textarea class="code" mode="ruby" style="display: none;" theme="night">
+$ ruby -nae 'BEGIN{c = w = 0}; c += $_.size; w += $F.size; \
+END{ printf "%8d%8d%8d %s\n", $., w, c, $FILENAME }' s-opt.rb
+       5      14      87 s-opt.rb
+$ wc s-opt.rb
+       5      14      87 s-opt.rb</textarea>
+  </section>
+
+  <section class="slide">
+    <h2>
+      More fun with <code>BEGIN</code> &amp; <code>END</code>
+    </h2>
+<textarea class="code" mode="ruby" style="display: none;" theme="night">$ cat example.csv 
+First name;Last name;Email
+Przemek;Kowalczyk;szeryf74@gmail.com
+John;Doe;jdoe@example.com
+
+$ ruby -F\; -nale 'BEGIN{puts "<table>"; t=:th}; 
+puts " <tr>", $F.map{|c|"  <#{t}>#{c}</#{t}>"}, " </tr>"; 
+t=:td; END{puts "</table>"}' example.csv 
+<table>
+ <tr>
+  <th>First name</th>
+  <th>Last name</th>
+  <th>Email</th>
+ </tr>
+ <tr>
+  <td>Przemek</td>
+  <td>Kowalczyk</td>
+  <td>szeryf74@gmail.com</td>
+ </tr>
+ <tr>
+  <td>John</td>
+  <td>Doe</td>
+  <td>jdoe@example.com</td>
+ </tr>
+</table>
+</textarea>
+  </section>
+
+  <section class="slide inverse">
+    <img class="bg" src="http://upload.wikimedia.org/wikipedia/commons/7/7c/Szlaki_wilkanowska.jpg" style="">
+    <code class='flickr'>source:wikipedia</code>
+    <h1 class="whiteshadow">
+      you've got to be kidding
+    </h1>
+  </section>
+
+  <section class="slide">
+    <h2>
+      <code>ruby -0[octal]</code>
+      <small>specify record separator (<code>\0</code>,&nbsp;if no argument)</small>
+    </h2>
+<textarea class="code" mode="ruby" style="display: none;" theme="night">
+$ find . -iname \*.rb -print0 | ruby -pl0e '$_.upcase!'
+./CLEAN.RB
+./S-OPT.RB
+./VERSION.RB
+./WARNINGS.RB</textarea>
+  </section>
+
+  <section class="slide">
+    <h2>
+      <code>ruby -0777</code>
+      <small>read whole file at once as a single string</small>
+    </h2>
+<textarea class="code" mode="ruby" style="display: none;" theme="night">
+$ ruby -n0777ae 'h=Hash.new(0); $F.each{|w|h[w.downcase]+=1};
+puts h.to_a.sort_by(&amp;:last).last(5)' file.txt 
+się
+52
+jest
+54
+nie
+58
+to
+63
+w
+85</textarea>
+  </section>
+
+  <section class="slide">
+    <h2>
+      <code>ruby -00</code>
+      <small>read file in paragraph mode</small>
+    </h2>
+<textarea class="code" mode="ruby" style="display: none;" theme="night">
+$ cat -> file.txt
+This should all be on one line 
+since it's one sentence.
+
+This is a new paragraph that
+should be separate.
+
+$ ruby -l00pe 'gsub(/\s*\n/, " ")' file.txt 
+This should all be on one line since it's one sentence. 
+This is a new paragraph that should be separate.
+
+$ ruby -00lpe 'gsub(/\s*\n/, " ")' file.txt 
+This should all be on one line since it's one sentence. 
+
+This is a new paragraph that should be separate.
+
+</textarea>
+  </section>
+
+  <section class="slide">
+    <h2>
+      Mastering <code>-l</code>-fu &amp; <code>-0</code>jitsu
     </h2>
     <ul>
-      <li class="slide">
-        <h3>What the system <strong>is</strong></h3>
+      <li>
+        <h3><code>$/</code> is input record separator. </h3>
+        Default value is <code>"\n"</code>. Set by <code>-0</code> option.
       </li>
-      <li class="slide">
-        <h3>Tends to be stable</h3>
+      <li>
+        <h3><code>$\</code> is output record separator. </h3>
+        Appended to <code>Kernel.print</code> output if non‐<code>nil</code>. Default value is <code>nil</code>.
       </li>
-      <li class="slide">
-        <h3>Boring stuff, dumb data-structures</h3>
+      <li>
+        <h3><code>-l</code> means <code>$\ = $/</code></h3>
       </li>
-      <li class="slide">
-        <h3>No use-case specific methods</h3>
+      <li>
+        <h3><code>-0</code> means <code>$/ = "\0"</code></h3>
+        or whatever is the argument to <code>-0</code>
       </li>
-      <li class="slide">
-        <h3>Used in different contexts!</h3>
-        <p class="slide">...which may lead to obesity (in traditional way)</p>
+      <li>
+        <h3><code>-l00</code> means <code>$\ = $/; $/ = "\n\n"</code></h3>
       </li>
-    </ul>
-  </section>
-
-  <section class="slide inverse">
-    <img src="http://images1.wikia.nocookie.net/__cb20100119010727/fallout/images/e/e0/VB_DD12_deco_1.jpg" class="vcenter opac4" style="margin-left:600px" width="400px">
-    <h2>Context</h2>
-    <ul>
-      <li class="slide">
-        <h3>Performs use-cases</h3>
-        a.k.a. scenarios, algorithms, habits
-      </li>
-      <li class="slide">
-        <h3>Makes objects play roles</h3>
-      </li>
-      <li class="slide">
-        <h3>Provides environment</h3>
+      <li>
+        <h3><code>-00l</code> means <code>$/ = "\n\n"; $\ = $/</code></h3>
       </li>
     </ul>
   </section>
 
   <section class="slide">
-    <img src="http://images3.wikia.nocookie.net/__cb20110316010652/fallout/images/2/22/MathWrath.png" class="vcenter opac4" style="margin-left:600px" width="400px">
-    <h2>Interaction</h2>
-    <ul>
-      <li class="slide">
-        <h3>What the system <strong>does</strong></h3>
-      </li>
-      <li class="slide">
-        <h3>Tends to change rapidly</h3>
-      </li>
-      <li class="slide">
-        <h3>Interesting stuff!</h3>
-      </li>
-      <li class="slide">
-        <h3>Roles interacting with each other</h3>
-      </li>
-      <li class="slide">
-        <h3>Usually not an actual object</h3>
-      </li>
-    </ul>
+    <h2>
+      <code>ruby -i[extension]</code>
+      <small>edit ARGV files in place (make backup if extension supplied)</small>
+    </h2>
+<textarea class="code" mode="ruby" style="display: none;" theme="night">
+$ ruby -i -pe 'gsub(/(\w+):/) { ":#{$1} =>" }' s-opt.rb
+
+$ cat s-opt.rb 
+#!ruby -s
+p :xyz => $xyz
+p :val => $val
+p :i_can_haz_hyphens => $i_can_haz_hyphens
+p :ARGV => ARGV</textarea>
   </section>
 
   <section class="slide">
-    <h2>DCI in example</h2>
-    <textarea class="code" mode="ruby" style="display: none;" theme="night">
-class Account
-  attr_accessor :balance
-end
+    <h2>
+      <code>ruby -i[extension]</code>
+      <small>edit ARGV files in place (make backup if extension supplied)</small>
+    </h2>
+<textarea class="code" mode="ruby" style="display: none;" theme="night">
+$ ruby -i.bak -pe 'gsub(/:(\w+) =>/) { "#{$1}:" }' s-opt.rb
 
-class TransferMoneyContext
-  def perform src_id, dst_id, amount
-    src_act = AccountRepo.fetch(src_id)
-    src_act.extend(TransferMoneySourceAccount)
-    dst_act = AccountRepo.fetch(src_id)
-    dst_act.extend(TransferMoneyDestinationAccount)
-    
-    src_act.transfer(amount, dst_act)
-  end
-end
+$ cat s-opt.rb
+#!ruby -s
+p xyz: $xyz
+p val: $val
+p i_can_haz_hyphens: $i_can_haz_hyphens
+p ARGV: ARGV
 
-class TransferMoneySourceAccount
-  def transfer amount, dst_act
-    if self.balance < amount
-      raise InsufficientFunds.new
-    else
-      transaction do
-        self.balance -= amount
-        self.log("transfer out", Time.now, amount)
-        dst_act.transfer_in(amount)
-      end
-    end
-  end
-end
-    </textarea>
-  </section>
-    
-  <section class="slide">
-    <div class="vcenter">
-      <h1>Architecture<br>The Lost Years</h2>
-      <h3>by Uncle Bob Martin</h3>
-      <a href="http://www.youtube.com/watch?v=WpkDN78P884">
-          http://www.youtube.com/watch?v=WpkDN78P884
-      </a>
-    </div>
+$ cat s-opt.rb.bak 
+#!ruby -s
+p :xyz => $xyz
+p :val => $val
+p :i_can_haz_hyphens => $i_can_haz_hyphens
+p :ARGV => ARGV</textarea>
   </section>
 
-  <section class="slide">
-    <h1>use-cases <strong>are</strong> your application<span class="slide">,<br>Rails isn't</span></h1>
-  </section>
 
-  <section class="slide">
-    <h2>Architecture according to Uncle Bob</h2>
-    <ul>
-      <li class="slide">
-        <h3>Entity</h3>
-        <p>Dumb data, application-<strong>independent</strong> business rules</p>
-      </li>
-      <li class="slide">
-        <h3>Interactor</h3>
-        <p>Application-<strong>specific</strong> business rules == use-cases</p>
-      </li>
-      <li class="slide">
-        <h3>Delivery mechanism</h3>
-        <p>Should be an implementation detail == a plugin</p>
-      </li>
-      <li class="slide">
-        <h3>Persistence</h3>
-        <p>Should be an implementation detail == a plugin</p>
-      </li>
-    </ul>
-  </section>
 
-  <section class="slide">
-    <h2>Architecture according to Uncle Bob</h2>
-    <ul>
-      <li class="slide">
-        <h3>Isolated layers</h3>
-      </li>
-      <li class="slide">
-        <h3>Communicating through simple data structures</h3>
-      </li>
-      <li class="slide">
-        <h3>Views so simple there's no point in testing them</h3>
-      </li>
-      <li class="slide">
-        <h3>The database is a detail!</h3>
-      </li>
-    </ul>
-  </section>
 
-  <section class="slide">
-    <h1>Good architecture allows to <strong>defer</strong> decisions</h1>
-  </section>
 
-  <section class="slide">
-    <h1>...maximizes number of decisions <strong>not</strong> made</h1>
-  </section>
 
-  <section class="slide">
-    <h2>It's Business Time by Jim Gay </h2>
-    <ul>
-      <li class="slide">
-        <h3>Data model != Domain model</h3>
-        <h3 class="slide">i.e. ActiveRecord::Base != models</h3>
-      </li>
-      <li class="slide">
-        <h3>separate what is stable and what changes</h3>
-      </li>
-    </ul>
-    <a href="http://www.youtube.com/watch?v=lhFSc0dWsto">
-      Presented at wroc_love.rb: http://www.youtube.com/watch?v=lhFSc0dWsto
-    </a>
-  </section>
 
-  <section class="slide">
-    <h2>Objects on Rails</h2>
-    <ul>
-      <li class="slide">
-        <h3>Single Responsibility Principle</h3>
-      </li>
-      <li class="slide">
-        <h3>Dependency Injection in Ruby!</h3>
-      </li>
-      <li class="slide">
-        <h3>de-couple as much as possible</h3>
-      </li>
-      <li class="slide">
-        <h3>"lone wolf" anti-pattern</h3>
-        <code>Post.find(id)</code>
-        vs.
-        <code>current_user.blog.posts.find(id)</code>
-        <h4 class="slide">
-          Coolest anti-pattern name since "shotgun surgery"!
-        </h4>
-      </li>
-      <li class="slide">
-        <h3>too much hassle with Exhibits</h3>
-      </li>
-    </ul>
-    <a href="http://objectsonrails.com/">
-      a must-read! => objectsonrails.com
-    </a>
-  </section>
 
   <section class="slide inverse">
-    <h1>
-      <img src="http://images2.wikia.nocookie.net/__cb20090903131624/fallout/images/e/eb/SHLDHOPE.gif" class="opac6">
-      A new hope
-    </h1>
-  </section>
-
-  <section class="slide">
-    <div class="vcenter">
-      <h1>
-        <img src="http://images1.wikia.nocookie.net/__cb20110809182237/fallout/images/thumb/c/c0/VaultBoyFO3.png/715px-VaultBoyFO3.png" class="opac6" width="250em">
-        This will be mainstream in 5 years
-      </h1>
-      <h3 class="slide">(except Java)</h3>
-    </div>
-  </section>
-
-  <section class="slide">
-    <h1>
-      <img src="http://images.wikia.com/fallout/images/a/a9/Computer_Whiz.png" class="opac6" width="250em">
-      examples
-    </h1>
-  </section>
-
-  <section class="slide">
-    <h1>
-      <em>caveat emptor:</em>
-      <br>
-      work in progress
-      <img src="http://images1.wikia.nocookie.net/__cb20101127012803/fallout/images/5/57/Nuclear_Anomaly.png" class="opac6" width="250em">
-    </h1>
-  </section>
-
-  <section class="slide">
-    <h1>
-      before
-      <img src="http://images.wikia.com/fallout/images/c/c1/Gun_Nut.png" class="opac6" width="250em">
-    </h1>
-  </section>
-
-  <section class="slide">
-    <h2>role.rb</h2>
-    <textarea class="code" mode="ruby" style="display: none;" theme="night">
-class Role < ActiveRecord::Base
-
-  belongs_to :user
-  belongs_to :project
-  ROLES = %w{creator member supervisor applicant follower}
-
-  validates :role_type, :inclusion => ROLES
-
-  after_create :notify_applicable_user, :unless => :accepted?
-
-  state_machine :initial => :pending do
-    state :pending, :accepted, :applied
-
-    after_transition any => :accepted, :do => :create_activity_item
-    after_transition :applied => :accepted, :do => :accept_applicant
-
-    event :accept do
-      transition :pending => :accepted
-      #create_notification
-    end
-
-    event :accept_application do
-      transition :applied => :accepted
-    end
-  end
-
-  def self.create_roles(users, project)
-    users.each do |user|
-      Role.create!(:user => user, :project => project, :role_type => 'member')
-    end
-  end
-
-  def self.create_member(user, project)
-    Role.create!(:user => user, :project => project, :role_type => 'member', :state => 'accepted')
-  end
-
-  def self.create_owner(user, project)
-    Role.create!(:user => user, :project => project, :role_type => 'creator', :state => 'accepted')
-    project.create_activity_item
-  end
-
-  def self.create_follower(project, user)
-    Role.create!(:user => user, :project => project, :role_type => 'follower', :state => 'accepted')
-  end
-
-  def self.create_user_follower(following_user, user)
-    following_user.own_projects.each do |project|
-      create_follower(project, user)
-    end
-  end
-
-  def change!(value)
-    update_attribute(:role_type, value)
-  end
-
-  def accept_applicant
-    self.role_type = "member"
-    self.save
-  end
-
-  private
-
-    def notify_applicable_user
-      if state == "pending" # user has been invited to join
-        notify_user
-      elsif state == "applied" # user has applied to join
-        notify_project_owner
-      end
-
-    end
-
-    def notify_user
-      path    = Rails.application.routes.url_helpers.accept_project_role_path(project, self)
-      subject = "You have been invited to project called #{project.name}"
-      body    = "<a href=\"#{path}\">Accept invitation here</a>"
-      Message.create_notification!(subject, body, user)
-    end
-
-    def notify_project_owner
-      path    = Rails.application.routes.url_helpers.accept_application_project_role_path(project, self)
-      subject = "#{user.name} would like to join your project called #{project.name}"
-      body    = "To Accept <a href=\"/users/#{user.id}\">#{(user.name)}'s</a> application, <a href=\"#{path}\">click here</a>"
-      Message.create_notification!(subject, body, self.project.owner)
-    end
-
-    def create_activity_item
-      aid = ActivityItem.gen_aid
-
-      # User has joined Project
-      ActivityItem.create_item(subject: self.user, item: self, second_subject: self.project, description: "NEW", activity_identifier: aid)
-
-      # Project owner has welcomed new user
-      ActivityItem.create_item(subject: self.project.owner, item: self, second_subject: self.user, description: "WELCOME", activity_identifier: aid)
-    end
-end
-    </textarea>
-  </section>
-
-  <section class="slide">
-    <h1>
-      <img src="http://images3.wikia.nocookie.net/__cb20120515011660/fallout/images/7/70/Pip_Boy_OMG.JPG" class="opac6" width="250em">
-      Single Responsibility Principle?
-    </h1>
-  </section>
-
-  <section class="slide">
-    <h2>§1 Role is sending notifications!</h2>
-    <textarea class="code" mode="ruby" style="display: none;" theme="night">
-after_create :notify_applicable_user, :unless => :accepted?
-
-private
-  def notify_applicable_user
-    if state == "pending" # user has been invited to join
-      notify_user
-    elsif state == "applied" # user has applied to join
-      notify_project_owner
-    end
-  end
-    </textarea>
-  </section>
-
-  <section class="slide">
-    <h2>§2 Role is producing HTML!</h2>
-    <textarea class="code" mode="ruby" style="display: none;" theme="night">
-def notify_user
-  path    = Rails.application.routes.url_helpers
-              .accept_project_role_path(project, self)
-  subject = "You have been invited to project called #{project.name}"
-  body    = "&lt;a href=\"#{path}\">Accept invitation here&lt;/a>"
-  Message.create_notification!(subject, body, user)
-end
-
-def notify_project_owner
-  path    = Rails.application.routes.url_helpers
-              .accept_application_project_role_path(project, self)
-  subject = "#{user.name} would like to join your project called #{project.name}"
-  body    = "To Accept &lt;a href=\"/users/#{user.id}\">#{(user.name)}'s&lt;/a>
-                application, &lt;a href=\"#{path}\">click here&lt;/a>"
-  Message.create_notification!(subject, body, self.project.owner)
-end
-    </textarea>
-  </section>
-
-  <section class="slide">
-    <h2>§3 Role has a state machine</h2>
-    <textarea class="code" mode="ruby" style="display: none;" theme="night">
-state_machine :initial => :pending do
-  state :pending, :accepted, :applied
-
-  after_transition any => :accepted, :do => :create_activity_item
-  after_transition :applied => :accepted, :do => :accept_applicant
-
-  event :accept do
-    transition :pending => :accepted
-    #create_notification
-  end
-
-  event :accept_application do
-    transition :applied => :accepted
-  end
-end
-
-def accept_applicant
-  self.role_type = "member"
-  self.save
-end
-    </textarea>
-  </section>
-
-  <section class="slide">
-    <h2>§4 Role creates activity items</h2>
-    <textarea class="code" mode="ruby" style="display: none;" theme="night">
-def create_activity_item
-  aid = ActivityItem.gen_aid
-
-  # User has joined Project
-  ActivityItem.create_item(subject: self.user, item: self, second_subject:
-               self.project, description: "NEW", activity_identifier: aid)
-
-  # Project owner has welcomed new user
-  ActivityItem.create_item(subject: self.project.owner, item: self, second_subject:
-               self.user, description: "WELCOME", activity_identifier: aid)
-end
-    </textarea>
-  </section>
-
-  <section class="slide">
-    <h2>§5 Role creates roles</h2>
-    <textarea class="code" mode="ruby" style="display: none;" theme="night">
-def self.create_roles(users, project)
-  users.each do |user|
-    Role.create!(:user => user, :project => project, :role_type => 'member')
-  end
-end
-
-def self.create_member(user, project)
-  Role.create!(:user => user, :project => project, :role_type => 'member',
-               :state => 'accepted')
-end
-
-def self.create_owner(user, project)
-  Role.create!(:user => user, :project => project, :role_type => 'creator',
-               :state => 'accepted')
-  project.create_activity_item
-end
-    </textarea>
-  </section>
-
-  <section class="slide">
-    <h2>§6 Role has security holes</h2>
-    <textarea class="code" mode="ruby" style="display: none;" theme="night">
-def self.create_follower(project, user)
-  Role.create!(:user => user, :project => project, :role_type => 'follower',
-               :state => 'accepted')
-end
-
-def self.create_user_follower(following_user, user)
-  following_user.own_projects.each do |project|
-    create_follower(project, user)
-  end
-end
-    </textarea>
-  </section>
-
-  <section class="slide">
-    <h2>§7 Role has backdoors</h2>
-    <textarea class="code" mode="ruby" style="display: none;" theme="night">
-def change!(value)
-  update_attribute(:role_type, value)
-end
-    </textarea>
-  </section>
-
-  <section class="slide inverse">
-    <h1>
-      <img src="http://images2.wikia.nocookie.net/__cb20100124232940/fallout/images/c/c2/FB3_Psyker.jpg" class="opac6" width="250em">    
-      after
-    </h1>
-  </section>
-
-  <section class="slide">
-    <h2>Project Membership Request</h2>
-    <textarea class="code" mode="ruby" style="display: none;" theme="night">
-require 'dependency_injection.rb'
-require 'uses_transaction.rb'
-
-class ProjectMembershipRequest
-  include UsesTransaction
-  extend DependencyInjection
-
-  inject_dependency :notification_source, %q{ Message.public_method(:create_request_notification!) }
-  inject_dependency :rails_url_helper, %q{ Rails.application.routes.url_helpers }
-  inject_dependency :colleagueships_source, %q{ Colleagueship.public_method(:make_pair) }
-
-  def request project, user
-    unless project.users.include?(user)
-      in_transaction.call do
-        colleagueships_source.call(user, project.owner)
-        role = project.roles.create(user: user, state: Role::APPLIED, role_type: Role::APPLICANT)
-
-        path = rails_url_helper.accept_application_project_role_path(project, role)
-        subject = "#{user.name} would like to join your project called #{project.name}"
-        body = "To Accept <a href=\"/users/#{user.id}\">#{(user.name)}'s</a> application, <a href=\"#{path}\">click here</a>"
-        notification_source.call(subject, body, project.owner, role)
-      end
-    end
-  end
-end    </textarea>
-  </section>
-
-  <section class="slide">
-    <h2>Project Membership Acceptance</h2>
-    <textarea class="code" mode="ruby" style="display: none;" theme="night">
-class ProjectMembershipAcceptance
-  include UsesTransaction
-  include CreatesActivityItems
-
-  def accept role
-    return :already_accepted unless role.state == Role::APPLIED || role.state == Role::PENDING
-    return :colleagueship_not_accepted unless role.project.owner.colleagues.include?(role.user)
-    return :project_archived if role.project.archived?
-    in_transaction.call do
-      role.project.chapters.create(name: "#{role.project.name.titleize}'s Lab Book", lab_book: role.user.lab_book)
-      role.role_type = Role::MEMBER
-      role.state = Role::ACCEPTED
-      create_activity_item(role)
-      role.save!
-    end
-  end
-
-private
-  def create_activity_item role
-    # User has joined Project
-    ai1 = activity_item_source.call(subject: role.user, item: role, second_subject: role.project, description: "NEW")
-    # Project owner has welcomed new user
-    activity_item_source.call(subject: role.project.owner, item: role, second_subject: role.user, description: "WELCOME", activity_identifier: ai1.activity_identifier)
-  end
-end    </textarea>
-  </section>
-
-  <section class="slide">
-    <h2>Plan Change</h2>
-    <textarea class="code" mode="ruby" style="display: none;" theme="night">
-class PlanChange
-  extend DependencyInjection
-  include UsesTransaction
-
-  inject_dependency :payments_proxy, %q{ PaymentsProxy.new }
-
-  def change user, plan_type, token
-    plan = user.plan
-    return :same_plan if token.nil? && plan.plan_type == plan_type
-    check_plan_limits(user, plan, plan_type)
-    in_transaction.call do
-      change_plan_for(user, plan, plan_type, token)
-    end
-  end
-
-private
-  def check_plan_limits user, plan, plan_type
-    if user.own_projects.only_private.count > plan_type.closed_project_limit
-      error "You own too many private projects for this plan."
-    elsif user.max_collaborators_in_any_closed_project > plan_type.colaborators_limit
-      error "The number of collaborators in at least one of your project exceeds this plan's limit."
-    end
-  end
-
-  def change_plan_for user, plan, plan_type, token
-    result = if plan.stripe_customer_token
-      handle_existing_customer(plan, plan_type, token)
-    else # no stripe_customer_token yet
-      handle_new_customer(user, plan, plan_type, token)
-    end
-    plan.plan_type = plan_type
-    plan.save!
-    return result
-  end
-    </textarea>
-  </section>
-  
-  
-  
-
-  <section class="slide">
-    <h1>how to use?</h1>
-  </section>
-
-  <section class="slide">
-    <h2>Roles Controller</h2>
-    <textarea class="code" mode="ruby" style="display: none;" theme="night">
-class RolesController < ApplicationController
-  def create
-    users_from_textboxlist = User.search_by_ids(params[:users_ids].split(/i*,i*/))
-    ProjectMembershipInvitation.new.invite(project, users_from_textboxlist)
-    redirect_to project, notice: 'Invitations have been sent.'
-  end
-
-  def accept
-    case ProjectMembershipAcceptance.new.accept(role)
-    when :already_accepted
-      redirect_to project, alert: "You have already accepted this invitation"
-    when :colleagueship_not_accepted
-      redirect_to project, notice: "You have to accept colleague invitation first."
-    when :project_archived
-      redirect_to project, notice: "You cannot join to archived project."
-    else
-      redirect_to project, notice: "You have been added to project called #{project.name}"
-    end
-  end
-    </textarea>
-  </section>
-
-  <section class="slide">
-    <h2>Role</h2>
-    <textarea class="code" mode="ruby" style="display: none;" theme="night">
-class Role < ActiveRecord::Base
-  belongs_to :user
-  belongs_to :project
-
-  CREATOR    = 'creator'
-  MEMBER     = 'member'
-  SUPERVISOR = 'supervisor'
-  APPLICANT  = 'applicant'
-  validates :role_type, inclusion: [CREATOR, MEMBER, SUPERVISOR, APPLICANT]
-
-  PENDING  = 'pending'
-  APPLIED  = 'applied'
-  ACCEPTED = 'accepted'
-  validates :state, inclusion: [PENDING, APPLIED, ACCEPTED]
-
-  scope :of_type,  ->(type)  { where(role_type: type) }
-  scope :in_state, ->(state) { where(state: state) }
-  scope :for,      ->(user)  { where(user_id: user) }
-
-  def initialize *args
-    super
-    self.state ||= PENDING
-  end
-
-  def pending?
-    state == PENDING
-  end
-end
-    </textarea>
-  </section>
-
-  <section class="slide">
-    <h1>helpers</h1>
-  </section>
-
-  <section class="slide">
-    <h2>Creates Activity Items</h2>
-    <textarea class="code" mode="ruby" style="display: none;" theme="night">
-module CreatesActivityItems
-  attr_writer :activity_item_source
-
-private
-  def activity_item_source
-    @activity_item_source ||= ActivityItem.public_method(:create_item)
-  end
-end    </textarea>
-  </section>
-
-  <section class="slide">
-    <h2>Uses Transaction</h2>
-    <textarea class="code" mode="ruby" style="display: none;" theme="night">
-module UsesTransaction
-  attr_writer :in_transaction
-
-private
-  def in_transaction
-    @in_transaction ||= Project.public_method(:transaction)
-  end
-end    </textarea>
-  </section>
-
-  <section class="slide">
-    <h2>Dependency Injection</h2>
-    <textarea class="code" mode="ruby" style="display: none;" theme="night">
-module DependencyInjection
-  def inject_dependency name, default
-    class_eval %Q{
-      attr_writer :#{name}
-      def #{name}
-        @#{name} ||= #{default}
-      end
-      private :#{name}
-    }
-  end
-end    </textarea>
-  </section>
-
-  <section class="slide">
-    <h1>how to test?</h1>
-  </section>
-
-  <section class="slide">
-    <h2>Project Membership Acceptance Test</h2>
-    <textarea class="code" mode="ruby" style="display: none;" theme="night">
-require_relative 'test_helper'
-require_relative '../../app/use-cases/project_membership_acceptance.rb'
-
-class ProjectMembershipAcceptanceTest < Test::Unit::TestCase
-
-  def setup
-    @lab_book = stub('lab_book')
-    @user     = stub('user', lab_book: @lab_book)
-    @owner    = stub('owner', colleagues: [@user])
-    @project  = stub('project', owner: @owner, name: stub(titleize: "Test"), chapters: stub())
-    @role     = stub('role', state: Role::PENDING, project: @project, user: @user, save!: true, accept!: true)
-
-    @activity_item = stub('activity_item', activity_identifier: '123456')
-    @activity_item_source = stub('activity_item_source', call: @activity_item)
-
-    @pma = ProjectMembershipAcceptance.new
-    @pma.in_transaction = ->(&blk){ @done_in_transaction = true; blk.call }
-    @pma.activity_item_source = @activity_item_source
-  end
-
-  def test_should_accept
-    @role.expects(:state=).with(Role::ACCEPTED)
-    @role.expects(:save!).returns(true)
-    assert_equal true, @pma.accept(@role)
-    assert @done_in_transaction, "should be done in transaction"
-  end
-
-  def test_should_not_accept_unless_pending
-    @role.expects(:state).returns(Role::ACCEPTED).twice
-    @role.expects(:save!).never
-    assert_equal :already_accepted, @pma.accept(@role)
-  end
-
-  def test_should_require_collegueship_to_be_accepted_first
-    @role.project.owner.colleagues.expects(:include?).with(@user).returns false
-    @role.expects(:save!).never
-    assert_equal :colleagueship_not_accepted, @pma.accept(@role)
-  end
-
-  def test_should_create_lab_book_chapter
-    @project.chapters.expects(:create).with(name: "Test's Lab Book", lab_book: @lab_book)
-    assert_equal true, @pma.accept(@role)
-  end
-
-  def test_should_create_activity_items
-    @activity_item_source.expects(:call).with(subject: @user, item: @role, second_subject: @project, description: "NEW").returns(@activity_item)
-    @activity_item_source.expects(:call).with(subject: @owner, item: @role, second_subject: @user, description: 'WELCOME', activity_identifier: '123456')
-    assert_equal true, @pma.accept(@role)
-  end
-
-end
-    </textarea>
-  </section>
-
-  <section class="slide">
-    <h2>Test Helper</h2>
-    <textarea class="code" mode="ruby" style="display: none;" theme="night">
-require 'test/unit'
-require 'mocha'
-
-unless defined? Role
-  class Role
-    APPLICANT = 'applicant'
-    MEMBER = 'member'
-    CREATOR = 'creator'
-    PENDING = 'pending'
-    APPLIED = 'applied'
-    ACCEPTED = 'accepted'
-  end
-end
-
-class NilClass
-  def blank?
-    true
-  end
-end    </textarea>
-  </section>
-
-  <section class="slide">
-    <h1>Y U NO <code>rake test</code>?</h1>
-  </section>
-
-  <section class="slide">
-    <h2><code>lib/tasks/tests.rake</code></h2>
-    <textarea class="code" mode="ruby" style="display: none;" theme="night">
-namespace :test do
-  Rake::TestTask.new(:usecases) do |t|
-    t.libs << 'test'
-    t.verbose = true
-    t.pattern = 'test/use-cases/**/*_test.rb'
-  end
-end
-Rake::Task['test:usecases'].comment = "Runs use cases tests"
-
-task "test" => ["test:usecases"]    </textarea>
-  </section>
-  
-  <section class="slide">
-    <h1>Y U NO <code>autotest</code>?</h1>
-  </section>
-
-  <section class="slide">
-    <h2><code>~/.autotest</code></h2>
-    <textarea class="code" mode="ruby" style="display: none;" theme="night">
-Autotest.add_hook :initialize do |at|
-  at.add_mapping %r[^app/use-cases/(.*)\.rb$] do |_, m|
-    at.files_matching %r%^test/use-cases/#{File.basename(m[1])}_test\.rb$%
-  end
-  at.add_mapping %r[^test/use-cases/.*.rb$] do |f, _|
-    f
-  end
-end
-    </textarea>
-  </section>
-  
-  <section class="slide">
-    <h1>
-      <img src="http://images2.wikia.nocookie.net/__cb20120516014008/fallout/images/9/9e/Pip_Boy_Alright.JPG" class="opac6" width="250em">
-      pros
-    </h1>
-  </section>
-
-  <section class="slide inverse">
-    <h1>
-      <img src="http://images.wikia.com/fallout/images/8/86/FB8_deco_3.png" width="250em">
-      use-cases easy to <strong>follow</strong>
-    </h1>
-  </section>
-
-  <section class="slide">
-    <h1>
-      <img src="http://images4.wikia.nocookie.net/__cb20110221180238/fallout/images/a/a5/Science.png" width="150em" class="opac6">
-      easier to <strong>modify</strong>
-    </h1>
-  </section>
-
-  <section class="slide inverse">
-    <h1>
-      <img src="http://images3.wikia.nocookie.net/__cb20110212004824/fallout/images/thumb/6/69/Poll.png/116px-Poll.png" class="opac6" width="200em">
-      easier to <strong>reason</strong> about
-    </h1>
-  </section>
-
-  <section class="slide inverse">
-    <h1>
-      <img src="http://images3.wikia.nocookie.net/__cb3/common/avatars/thumb/e/e9/4057437.png/150px-4057437.png" class="opac6" width="200em">
-      dependencies under <strong>control</strong>
-    </h1>
-  </section>
-
-  <section class="slide inverse">
-    <h1>
-      <img src="http://images1.wikia.nocookie.net/__cb20050719193917/fallout/images/9/9a/Bonusrateoffire.gif" class="opac6" width="200em">
-      <strong>crazy</strong> fast tests
-    </h1>
-  </section>
-
-  <section class="slide">
-    <h2>units</h2>
-    <pre>
-$ time rake test:units
-# Running tests:
-
-..................................................................................................................................................................
-
-Finished tests in 33.363820s, 4.8855 tests/s, 8.5422 assertions/s.
-
-163 tests, 285 assertions, 0 failures, 0 errors
-
-real  0m51.735s
-user  0m43.616s
-sys   0m2.795s
-</pre>
-  </section>
-
-  <section class="slide">
-    <h2>units</h2>
-    <pre>
-$ time rake test:units
-# Running tests:
-
-..................................................................................................................................................................
-
-Finished tests in <u>33.363820s</u>, 4.8855 tests/s, 8.5422 assertions/s.
-
-163 tests, 285 assertions, 0 failures, 0 errors
-
-real  <u>0m51.735s</u>
-user  0m43.616s
-sys   0m2.795s
-</pre>
-  </section>
-
-  <section class="slide">
-    <h2>use cases</h2>
-    <pre>
-$ time rake test:usecases
-# Running tests:
-
-................................................
-
-Finished tests in 0.081814s, 586.6967 tests/s, 1821.2042 assertions/s.
-
-48 tests, 149 assertions, 0 failures, 0 errors, 0 skips
-
-real  0m6.375s
-user  0m5.115s
-sys   0m1.175s
-    </pre>
-  </section>
-
-  <section class="slide">
-    <h2>use cases</h2>
-    <pre>
-$ time rake test:usecases
-# Running tests:
-
-................................................
-
-Finished tests in <u>0.081814s</u>, 586.6967 tests/s, 1821.2042 assertions/s.
-
-48 tests, 149 assertions, 0 failures, 0 errors, 0 skips
-
-real  <u>0m6.375s</u>
-user  0m5.115s
-sys   0m1.175s
-    </pre>
-  </section>
-
-  <section class="slide">
-    <h1>
-      <img src="http://images2.wikia.nocookie.net/__cb20111225221352/fallout/images/d/da/Science_icon.png" class="opac6" width="250em">
-      easy to test <strong>all</strong> scenarios
-    </h1>
-  </section>
-
-  <section class="slide inverse">
-    <h1>
-      <img src="http://images4.wikia.nocookie.net/__cb20060612164455/fallout/images/2/25/Radsuit.JPG" class="opac6" width="250em">
-      cons
-    </h1>
-  </section>
-  
-  <section class="slide">
-    <h1>
-      <img src="http://images1.wikia.nocookie.net/__cb20101012144509/fallout/images/4/4e/LaserCommander.png" class="opac6" width="400em">
-      no Rails <strong>goodies</strong>
-    </h1>
-  </section>
-  
-  <section class="slide inverse">
-    <h1>
-      <img src="http://images4.wikia.nocookie.net/__cb20090110013115/fallout/images/1/18/Mbox_stub.png" class="opac6" width="400em">
-      tedious requires
-    </h1>
-  </section>
-  
-  <section class="slide">
-    <h1>
-      <img src="http://images2.wikia.nocookie.net/__cb20111023220860/fallout/images/thumb/4/48/Married.svg/675px-Married.svg.png" class="opac6" width="400em">
-      brittle tests?
-    </h1>
-  </section>
-
-  <section class="slide inverse">
-    <h1>
-      <img src="http://images2.wikia.nocookie.net/__cb20110806110233/fallout/pl/images/8/83/Vbperk.jpg" class="opac6" width="200em">
+    <img class="bg" src="http://upload.wikimedia.org/wikipedia/commons/e/e0/Szlak_na_wychodek.JPG" style="">
+    <code class='flickr'>source:wikipedia</code>
+    <h1 class="whiteshadow">
       Thank you!
+      <br>
+      <br>
+      Questions?
     </h1>
   </section>
 
@@ -1715,8 +853,8 @@ sys   0m1.175s
     <ul>
       <li>
         <h3>This presentation</h3>
-        <a href="http://szeryf.github.com/refactoring-to-use-cases/uc.html">
-          http://szeryf.github.com/refactoring-to-use-cases/uc.html
+        <a href="http://szeryf.github.com/ruby-command-line/ruby.html">
+          http://szeryf.github.com/ruby-command-line/ruby.html
         </a>
       </li>
       <li>
@@ -1731,13 +869,7 @@ sys   0m1.175s
           http://szeryf.wordpress.com/
         </a>
       </li>
-      <li>
-        <h3>Most of these funny pictures</h3>
-        <a href="http://fallout.wikia.com/wiki/Fallout_Wiki">
-          http://fallout.wikia.com/wiki/Fallout_Wiki
-        </a>
-      </li>
-    </div>
+    </ul>
   </section>
 
   <form action="." method="get" class="goto-form">
