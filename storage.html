@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<head>
+  <script type="text/javascript" charset="utf-8">
+    function set_secret() {
+      localStorage['secret'] = prompt('secret:');
+    }
+    function show_secret() {
+      alert(localStorage['secret']);
+    }
+  </script>
+</head>
+<body>
+  <button onclick='set_secret()'>Set secret</button>
+  <button onclick='show_secret()'>Show secret</button>
+</body>

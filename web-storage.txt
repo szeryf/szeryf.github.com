@@ -1,0 +1,48 @@
+Web Storage
+
+
+localStorage & sessionStorage
+
+
+// code example
+szeryf.github.com/storage.html
+
+function set_secret() {
+  localStorage['secret'] = prompt('secret:');
+}
+function show_secret() {
+  alert(localStorage['secret']);
+}
+
+
+sessionStorage: browser session scoped (better than cookies in some situations)
+
+
+HTML5 STORAGE SUPPORT
+IE    FIREFOX    SAFARI    CHROME    OPERA    IPHONE    ANDROID
+8.0+    3.5+      4.0+      4.0+      10.5+    2.0+     2.0+
+
+size restrictions
+5 MB (IE8: 10MB)
+
+// with code
+
+
+Little big details
+- small settings like last used tab, sorting, search mode, search term, view mode
+
+
+Alternatives (session, cookies, db) clunky or tiresome
+
+
+Immediate engagement
+
+
+Small problem
+(another browser)
+
+
+Bigger problem
+(another computer)
+
+
