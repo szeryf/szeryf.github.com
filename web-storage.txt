@@ -15,7 +15,8 @@ function show_secret() {
 }
 
 
-sessionStorage: browser session scoped (better than cookies in some situations)
+sessionStorage: browser session scoped 
+(better than cookies in some situations, e.g. simultaneous transactions in multiple browser windows)
 
 
 HTML5 STORAGE SUPPORT
@@ -36,6 +37,14 @@ Alternatives (session, cookies, db) clunky or tiresome
 
 
 Immediate engagement
+see: http://www.slideshare.net/bokardo/designing-for-social-traction
+
+
+Instead of:
+sign-up => use => customer
+
+Try:
+use => sign-up => customer
 
 
 Small problem
