@@ -4,8 +4,7 @@ Web Storage
 localStorage & sessionStorage
 
 
-// code example
-szeryf.github.com/storage.html
+code example -> szeryf.github.com/storage.html
 
 function set_secret() {
   localStorage['secret'] = prompt('secret:');
@@ -26,7 +25,6 @@ IE    FIREFOX    SAFARI    CHROME    OPERA    IPHONE    ANDROID
 size restrictions
 5 MB (IE8: 10MB)
 
-// with code
 
 
 Little big details
@@ -36,8 +34,7 @@ Little big details
 Alternatives (session, cookies, db) clunky or tiresome
 
 
-Immediate engagement
-see: http://www.slideshare.net/bokardo/designing-for-social-traction
+Immediate engagement -> http://www.slideshare.net/bokardo/designing-for-social-traction
 
 
 Instead of:
