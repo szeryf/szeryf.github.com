@@ -1,9 +1,6 @@
 Web Storage
 
 
-localStorage & sessionStorage
-
-
 code example -> szeryf.github.com/storage.html
 
 function set_secret() {
@@ -14,6 +11,7 @@ function show_secret() {
 }
 
 
+localStorage & sessionStorage
 sessionStorage: browser session scoped 
 (better than cookies in some situations, e.g. simultaneous transactions in multiple browser windows)
 
