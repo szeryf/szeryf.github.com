@@ -7,9 +7,18 @@
     function show_secret() {
       alert(localStorage['secret']);
     }
+    function set_session_secret() {
+      sessionStorage['secret'] = prompt('secret:');
+    }
+    function show_session_secret() {
+      alert(sessionStorage['secret']);
+    }
   </script>
 </head>
 <body>
   <button onclick='set_secret()'>Set secret</button>
   <button onclick='show_secret()'>Show secret</button>
+
+  <button onclick='set_session_secret()'>Set session secret</button>
+  <button onclick='show_session_secret()'>Show session secret</button>
 </body>
