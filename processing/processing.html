@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=1024, user-scalable=no">
+
+  <title>Your deck.js Presentation</title>
+
+  <!-- Required stylesheet -->
+  <link rel="stylesheet" media="screen" href="../deck.js/core/deck.core.css">
+
+  <!-- Extension CSS files go here. Remove or add as needed. -->
+  <link rel="stylesheet" media="screen" href="../deck.js/extensions/goto/deck.goto.css">
+  <link rel="stylesheet" media="screen" href="../deck.js/extensions/menu/deck.menu.css">
+  <link rel="stylesheet" media="screen" href="../deck.js/extensions/navigation/deck.navigation.css">
+  <link rel="stylesheet" media="screen" href="../deck.js/extensions/status/deck.status.css">
+  <link rel="stylesheet" media="screen" href="../deck.js/extensions/scale/deck.scale.css">
+
+  <!-- Style theme. More available in /themes/style/ or create your own. -->
+  <link rel="stylesheet" media="screen" href="../deck.js/themes/style/web-2.0.css">
+  <!-- <link rel="stylesheet" media="screen" href="../deckjs-theme-mozilla/sandstone.nightly.css"> -->
+
+  <!-- Basic black and white print styles -->
+  <link rel="stylesheet" media="print" href="../deck.js/core/print.css">
+
+  <!-- Required Modernizr file -->
+  <script src="../deck.js/modernizr.custom.js"></script>
+
+  <!-- Transition theme. More available in /themes/transition/ or create your own. -->
+  <link rel="stylesheet" media="screen" href="../deck.js/themes/transition/horizontal-slide.css">
+
+  <style type="text/css">
+    body {
+      text-rendering: optimizeLegibility;
+      font-variant-ligatures: contextual historical-ligatures common-ligatures;
+      font-feature-settings: "kern"; /* standard */
+      font-kerning: normal; /* Safari 7+, Firefox 24+, Chrome 33(?)+, Opera 21+*/
+    }
+    .left {
+      float: left;
+    }
+    .right {
+      float: right;
+    }
+    .left + .space {
+      margin-left: 20px;
+    }
+    .opac6 {
+      opacity: 0.6;
+    }
+    .opac4 {
+      opacity: 0.4;
+    }
+    .opac2 {
+      opacity: 0.2;
+    }
+    img.bg {
+      /* Set rules to fill background */
+      min-height: 100%;
+      min-width: 1024px;
+
+      /* Set up proportionate scaling */
+      width: 100%;
+      height: auto;
+
+      /* Set up positioning */
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      z-index: -100;
+      margin: auto;
+    }
+    img {
+       padding: 2px;
+       border:1px solid #021a40;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="deck-container">
+
+    <!-- Begin slides. Just make elements with a class of slide. -->
+<!-- PROCESSING
+
+
+- what it is?
+
+- what it isn't?
+
+- toolset (Processing, p5, py-processing, processing.js)
+
+- similar libs
+  - cinema4d
+  - nodebox
+
+- utility functions
+  - width, height,
+  - images
+  - saving frames
+    - animated gifs
+  - events (keypressed)
+
+- 3d rendering
+ -->
+  <section class="slide">
+    <div class="vcenter">
+      <h1>Processing</h1>
+      <h2>An introduction</h2>
+      <h4>Przemysław::Kowalczyk</h4>
+    </div>
+    <img class="bg opac6"
+         src="https://40.media.tumblr.com/a3905c4632290cc1ded80baf1dcd2944/tumblr_nhm58i5b4R1u6h176o5_1280.jpg">
+  </section>
+
+  <section class="slide">
+    <h2>What it is?</h2>
+    <blockquote>
+      Processing is a programming language, development environment, and online community. <small>[...] </small>
+      Processing has promoted software literacy within the visual arts and visual literacy within technology.
+    </blockquote>
+    <img class="bg opac6"
+         src="https://41.media.tumblr.com/d84ec4a70fbcb05301aa0f51c0abe917/tumblr_nhm58i5b4R1u6h176o2_1280.jpg">
+  </section>
+
+  <section class="slide">
+    <h2>What it is? <small>cont’d</small></h2>
+    <ul class="left">
+      <li>
+        free &amp; open-source
+      </li>
+      <li>
+        2D, 3D, OpenGL, PDF
+      </li>
+      <li>
+        multiplatform
+      </li>
+      <li>
+        a lot of docs, examples, tutorials
+        <br>
+        <small>(but mostly targeted at the beginners)</small>
+      </li>
+    </ul>
+    <img src="https://33.media.tumblr.com/1adbe97d645b9fd7fac9a6e169cfc844/tumblr_nhiecgvIeT1u6h176o3_500.gif">
+  </section>
+
+  <section class="slide">
+    <h2>What it isn’t?</h2>
+    <ul>
+      <li class="slide">a programming language
+      </li>
+      <li class="slide">a game-development library
+      </li>
+      <li class="slide">a graphical studio
+      </li>
+      <li class="slide">a 3d-modeling studio
+      </li>
+      <li class="slide">a very sophisticated graphics library
+      </li>
+      <li class="slide">anything that can be directly useful in your work
+      </li>
+    </ul>
+    <img class="bg opac2"
+         src="https://40.media.tumblr.com/9386b2b5c8c157995a7911b14f97b23b/tumblr_nhaluitefM1u6h176o1_1280.jpg">
+  </section>
+
+  <section class="slide">
+    <h2>Processing flavors</h2>
+    <ul class="left">
+      <li>
+        Processing (Java)
+      </li>
+      <li>
+        p5.js
+      </li>
+      <li>
+        Processing.py
+      </li>
+      <li>
+        Processing.js
+      </li>
+    </ul>
+    <img src="https://31.media.tumblr.com/45953c80e6e18887eccdc087ae6c1c86/tumblr_nhm4f5PKqk1u6h176o4_500.gif">
+  </section>
+
+  <section class="slide">
+    <h2>Processing (Java)</h2>
+    <ul>
+      <li>
+        Simplified language (a DSL, almost)
+        <ul>
+          <li>
+            No need to define the top-level class
+          </li>
+          <li>
+            Processing library accessible in global namespace (kind of)
+          </li>
+          <li>
+            Access modifiers are not used (by convention)
+          </li>
+          <li>
+            A few extensions: <code>#aabbcc</code> for colors, <code>color</code> type, ...
+          </li>
+        </ul>
+      </li>
+      <li>
+        Preprocessed into std Java source file
+        <br>
+        <small>(technically: inserted into a class that extends <code>PApplet</code>, which defines all the goodies)</small>
+      </li>
+      <li>
+        Can still use all Java features (almost)
+      </li>
+    </ul>
+    <img class="bg opac2"
+         src="https://36.media.tumblr.com/d8d19b4d61553c829d387bfca63717c9/tumblr_nh9ft8hKXe1u6h176o2_1280.jpg">
+  </section>
+
+  <section class="slide">
+    <h2>p5.js &amp; Processing.js</h2>
+    <ul>
+      <li>p5.js is the official &ldquo;interpretation&rdquo; (p5js.org)</li>
+      <li>Processing.js is an earlier port (a &ldquo;sister project&rdquo;, processingjs.org)</li>
+      <li>they are both just libraries &amp; don’t change the language</li>
+      <li>code is embedded in browser page, draws on a <code>CANVAS</code> element by default</li>
+      <li>usual JS quirks apply (e.g. loading images is async)</li>
+      <li>p5.js has addon libraries that make it easy to interact with other HTML5 objects, including text, input, video, webcam, and sound
+      </li>
+    </ul>
+    <img class="bg opac4"
+         src="https://40.media.tumblr.com/3320221043736cb67b1ae201cb8dfa9a/tumblr_nh913rBpYE1u6h176o1_1280.jpg">
+  </section>
+
+  <section class="slide">
+    <h2>Processing.py</h2>
+    <p class="left">Just a library, no changes to language</p>
+    <img src="https://41.media.tumblr.com/743cb639a7a649cd4e18ab73ef3bc128/tumblr_nh9f8jLPvs1u6h176o1_1280.jpg">
+  </section>
+
+  <section class="slide">
+    <h2>What about Ruby?</h2>
+    <p class="left">
+      https://github.com/jashkenas/ruby-processing<br>
+      Looks good, haven't tried it yet :(</p>
+    <img src="https://33.media.tumblr.com/bec683d654f1a0f1f397a7049661d4a4/tumblr_nhim4jnHRJ1u6h176o2_500.gif">
+  </section>
+
+  <section class="slide">
+    <h2>Processing Development Environment (PDE)</h2>
+    <ul class="left">
+      <li>good for beginners</li>
+      <li>not really a full-blown IDE</li>
+      <li>uses sketches &amp; sketchbooks</li>
+      <li>you can have many source files but they end up inside the same class</li>
+      <li>easy access to examples and docs</li>
+      <li>poor editor</li>
+      <li>you can use Java mode or install JS or Python modes</li>
+      <li>external editor can be used</li>
+    </ul>
+    <img src="https://31.media.tumblr.com/640b8ac0907978b8f1d1abbb6731415c/tumblr_nh9079REf01u6h176o1_400.gif">
+  </section>
+
+  <section class="slide">
+    <h2>Let’s start coding!</h2>
+    <p>The <code>setup</code> method is used to setup the window &amp; the environment. Called once when the program starts. You can use it load media, fonts etc.</p>
+    <pre class="left">
+void setup() {
+  size(1024, 768);
+  background(255);
+  stroke(127, 255, 0);
+  line(0, 0, width, height);
+}
+    </pre>
+    <img src="https://31.media.tumblr.com/6044de85ded8a49a56a5490e4bf31743/tumblr_nh9ideY4x81u6h176o2_250.gif">
+  </section>
+
+  <section class="slide">
+    <h2>The <code>draw</code> method</h2>
+    <p>Called to draw each frame (typically 60 fps).</p>
+    <pre class="left">
+void setup() {
+  size(1024, 768);
+  stroke(127, 255, 0);
+}
+
+void draw() {
+  background(255);
+  line(0, 0, frameCount % width, height);
+}
+    </pre>
+    <img src="https://38.media.tumblr.com/df4a114eeea0c01384a29df1e8da569c/tumblr_nh91r4vYTr1u6h176o1_400.gif">
+  </section>
+
+  <section class="slide">
+    <h2>Mouse events</h2>
+    <p>You can define callbacks for all mouse related events: move, click, drag, wheel.
+    <p>Mouse state can be read through variables: <code>mouseX</code>, <code>mouseY</code>, <code>mouseButton</code>, <code>mousePressed</code>.</p>
+    <pre class="left">
+void mousePressed() {
+  line(mouseX, mouseY, width, height);
+}
+    </pre>
+    <img src="https://38.media.tumblr.com/eaf3b37fd29579c2bbbc8c4d7317374d/tumblr_nh8vocpcs31u6h176o1_400.gif">
+  </section>
+
+  <section class="slide">
+    <h2>Keyboard events</h2>
+    <p>You can define callbacks for keyboard related events: <code>keyPressed</code>, <code>keyReleased</code>, <code>keyTyped</code>.
+    <p>Keyboard state can be read through variables: <code>keyPressed</code>, <code>key</code>, <code>keyCode</code>.</p>
+    <table>
+      <tr>
+        <td>
+          <pre class="left">int step = 0;
+void draw() {
+  line(0, 0, frameCount % width, height - step);
+}
+void keyPressed() {
+  if (key == 'r') {
+    step += 10;
+  }
+}</pre>
+        </td>
+        <td style='vertical-align:middle'>
+          <img src="https://31.media.tumblr.com/eb690c02c5ee6900f5ddbfefa33a341f/tumblr_ni6rl8M28W1u6h176o1_r3_500.gif">
+        </td>
+      </tr>
+    </table>
+  </section>
+
+  <section class="slide">
+    <h2>Saving pretty pictures</h2>
+    <p>Just call <code>save("name")</code>.
+    <p>Append a file extension to the name of the file, to indicate the file format to be used: either TIFF (.tif), TARGA (.tga), JPEG (.jpg), or PNG (.png).</p>
+    <pre style="max-width:666px;float:left;">
+size(500, 500);
+smooth();
+background(#120930);
+stroke(#FFEECC, 20);
+strokeWeight(3);
+for (int i = 0; i &lt; width; i += 7) {
+  line(0, i, i, height);
+  line(0, i, width - i, 0);
+  line(i, 0, width, i);
+  line(i, height, width, height - i);
+}
+save("filename.jpg");
+    </pre>
+    <img src="filename.jpg">
+  </section>
+
+  <section class="slide">
+    <h2>Saving a lot of pretty pictures</h2>
+    <p>Just call <code>saveFrame("name-####.ext")</code>.
+    <p>Saves a numbered sequence of images, one image each time the function is run. You can specify the name of the sequence with the filename parameter, including hash marks (<code>####</code>), which will be replaced by the current frameCount value.</p>
+    <pre style="max-width:666px;float:left;">float rot = 36, deltaRot = -.4;
+void draw() {
+  background(#36465d);
+  int c = 0;
+  translate(width / 2, height / 2);
+  for(int size=240; size>0; size-=10) {
+    fill(c = 255 - c);
+    ellipse(-size,-size,size*2,size);
+    rotate(PI / rot);
+  }
+  rot += deltaRot;
+  if (rot &lt; 12)      deltaRot =  .4;
+  else if (rot > 36) deltaRot = -.4;
+  if (frameCount &lt; 123) {
+    saveFrame("frame-####.png");
+  }
+}</pre>
+    <img src="spin_anim.gif">
+  </section>
+
+  <section class="slide">
+    <h2>Pretty pics to animated GIF</h2>
+    <ul class="left">
+      <li>
+        Use ImageMagick:<br>
+        <code>convert -delay 2 -layers OptimizePlus frame-*.png spin_anim.gif</code>
+      </li>
+      <li>
+        install a library
+      </li>
+      <li>
+        use gifsickle, ezgif.com etc.
+      </li>
+    </ul>
+    <img src="https://33.media.tumblr.com/639446a0ef09e35b7002ce70df787c40/tumblr_nhalkt8dfF1u6h176o1_400.gif">
+  </section>
+
+  <section class="slide">
+    <h2>Using existing images</h2>
+    <p>Just call <code>loadImage("name")</code> (it needs to be preloaded when using JS).
+    <p>You get a <code>PImage</code> object which has <code>width</code>, <code>height</code>, <code>pixels</code>.</p>
+    <pre style="max-width:700px;float:left;">
+PImage photo, starfield;
+void setup() {
+  photo = loadImage("alpha.png");
+  starfield = loadImage("starfield.jpg");
+  size(photo.width, photo.height);
+}
+void draw() {
+  float xoffset = frameCount % width;
+  float yoffset = xoffset*height/width;
+  image(starfield, xoffset, yoffset);
+  image(starfield, xoffset - width,
+                   yoffset);
+  image(starfield, xoffset,
+                   yoffset - height);
+  image(starfield, xoffset - width,
+                   yoffset - height);
+  image(photo, 0, 0);
+}
+    </pre>
+    <img src="raining-stars.gif">
+  </section>
+
+  <section class="slide">
+    <h2>Loading SVG files</h2>
+    <table>
+      <tr>
+        <td>
+          <pre style="max-width:700px">
+PShape usa, state;
+String[] Obama = {"HI","RI","CT"...
+String[] McCain = {"AK","GA","AL"...
+void setup() {
+  size(950, 600);
+  usa = loadShape( "http://upload.wikimedia.org/wikipedia/commons/3/32/Blank_US_Map.svg");
+  shape(usa, 0, 0);
+  statesColoring(Obama , #0000FF);
+  statesColoring(McCain, #FF0000);
+}
+void statesColoring(String[] states,
+                    int c) {
+  for (int i=0;i&lt;states.length;++i) {
+    state = usa.getChild(states[i]);
+    state.disableStyle();
+    fill(c);
+    noStroke();
+    shape(state, 0, 0);
+  }
+}</pre>
+        </td>
+        <td>
+          <img src="http://upload.wikimedia.org/wikipedia/commons/a/ac/Processing-sketch_jun11a.png">
+        </td>
+      </tr>
+    </table>
+  </section>
+
+  <section class="slide">
+    <h2>Let’s do it in 3D!</h2>
+<pre style="max-width:600px;float:left;">
+size(360, 640, P3D);
+background(0);
+lights();
+
+noStroke();
+pushMatrix();
+translate(130, 80, 0);
+rotateY(1.25);
+rotateX(-0.4);
+box(100);
+popMatrix();
+
+noFill();
+stroke(255);
+translate(200, height * 0.7, -200);
+sphere(200);
+</pre>
+    <img src="3d.png">
+  </section>
+
+  <section class="slide">
+    <h2>What else is there?</h2>
+    <ul class="left" style="max-width: 700px;">
+      <li>colors modes: RGB, HSB, extraction &amp; composition helpers, alpha,</li>
+      <li>blend modes: addition, substraction, exclusion, dodge, burn etc.,</li>
+      <li>filters: blur, treshold, dilate, erode etc.,</li>
+      <li>off-screen graphics,</li>
+      <li>curves: bezier &amp; splines,</li>
+      <li>shapes, vertexes,</li>
+      <li>typography: text display, fonts,</li>
+      <li>trigonometric functions,</li>
+      <li>random noise generators,</li>
+    </ul>
+    <img src="https://38.media.tumblr.com/69fc88b23edb6951b6f94a90ec498b93/tumblr_nhm3kxYpoK1u6h176o1_500.gif">
+  </section>
+
+  <section class="slide">
+    <h2>What else is there (for 3D)?</h2>
+    <ul class="left">
+      <li>matrix transformations,</li>
+      <li>textures,</li>
+      <li>shaders,</li>
+      <li>lighting: directional, spot, light falloff, material shininess, etc.,</li>
+      <li>camera &amp; perspective,</li>
+    </ul>
+    <img src="https://38.media.tumblr.com/5250888abea924d68201b232cb92703c/tumblr_nhbaq0j6j51u6h176o3_400.gif">
+  </section>
+
+  <section class="slide">
+    <h2>Have fun!</h2>
+    <ul class="left">
+      <li>
+        <a href="https://processing.org/tutorials/">https://processing.org/tutorials/</a>
+      </li>
+      <li>
+        <a href="http://funprogramming.org/">http://funprogramming.org/</a>
+      </li>
+    </ul>
+    <img src="https://33.media.tumblr.com/6333bcaa11ee149e0a3639e99694cdcd/tumblr_nhm5ufzaLU1u6h176o1_500.gif">
+  </section>
+
+    <!-- End slides. -->
+
+    <!-- Begin extension snippets. Add or remove as needed. -->
+
+    <!-- deck.navigation snippet -->
+    <div aria-role="navigation">
+      <a href="#" class="deck-prev-link" title="Previous">&#8592;</a>
+      <a href="#" class="deck-next-link" title="Next">&#8594;</a>
+    </div>
+
+    <!-- deck.status snippet -->
+    <p class="deck-status" aria-role="status">
+      <span class="deck-status-current"></span>
+      /
+      <span class="deck-status-total"></span>
+    </p>
+
+    <!-- deck.goto snippet -->
+    <form action="." method="get" class="goto-form">
+      <label for="goto-slide">Go to slide:</label>
+      <input type="text" name="slidenum" id="goto-slide" list="goto-datalist">
+      <datalist id="goto-datalist"></datalist>
+      <input type="submit" value="Go">
+    </form>
+
+    <!-- End extension snippets. -->
+  </div>
+
+<!-- Required JS files. -->
+<script src="../deck.js/jquery.min.js"></script>
+<script src="../deck.js/core/deck.core.js"></script>
+
+<!-- Extension JS files. Add or remove as needed. -->
+<script src="../deck.js/extensions/menu/deck.menu.js"></script>
+<script src="../deck.js/extensions/goto/deck.goto.js"></script>
+<script src="../deck.js/extensions/status/deck.status.js"></script>
+<script src="../deck.js/extensions/navigation/deck.navigation.js"></script>
+<script src="../deck.js/extensions/scale/deck.scale.js"></script>
+
+<!-- Initialize the deck. You can put this in an external file if desired. -->
+<script>
+  ligature = function(extended, node) {
+      if (!node) {
+          ligature(extended, document.body);
+      }
+      else {
+          if (node.nodeType == 3 && node.parentNode.nodeName != "SCRIPT" && node.parentNode.nodeName != "PRE") {
+              node.nodeValue = node.nodeValue
+                  .replace(/ffl/g, "ﬄ")
+                  // .replace(/ffi/g, "ﬃ")
+                  .replace(/fl/g, "ﬂ")
+                  .replace(/fi/g, "ﬁ")
+                  .replace(/fff/g, "fﬀ")
+                  .replace(/ff/g, "ﬀ")
+                  // .replace(/ij/g, "ĳ")
+                  // .replace(/IJ/g, "Ĳ");
+
+              if (extended) {
+                  node.nodeValue = node.nodeValue
+                      // .replace(/ae/g, "æ")
+                      // .replace(/A[Ee]/g, "Æ")
+                      // .replace(/oe/g, "œ")
+                      // .replace(/O[Ee]/g, "Œ")
+                      // .replace(/ue/g, "ᵫ")
+                      .replace(/st/g, "ﬆ");
+              }
+          }
+          if (node.childNodes) {
+              for (var i=0; i < node.childNodes.length; i++) {
+                  ligature(extended, node.childNodes.item(i));
+              }
+          }
+      }
+  };
+  $(function() {
+    // ligature(false);
+    $("h1,h2,h3,h4").each(function(i, node) { ligature(true, node); });
+    $.deck(".slide");
+  });
+</script>
+</body>
+</html>
