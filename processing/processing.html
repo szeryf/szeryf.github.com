@@ -173,13 +173,13 @@
         Processing (Java)
       </li>
       <li>
-        p5.js
+        p5.js (and Processing.js)
       </li>
       <li>
         Processing.py
       </li>
       <li>
-        Processing.js
+        Ruby-Processing
       </li>
     </ul>
     <img src="https://31.media.tumblr.com/45953c80e6e18887eccdc087ae6c1c86/tumblr_nhm4f5PKqk1u6h176o4_500.gif">
@@ -243,7 +243,7 @@
     <h2>What about Ruby?</h2>
     <p class="left">
       https://github.com/jashkenas/ruby-processing<br>
-      Looks good, haven't tried it yet :(</p>
+      Needs Processing, java, jruby, but it's really cool!</p>
     <img src="https://33.media.tumblr.com/bec683d654f1a0f1f397a7049661d4a4/tumblr_nhim4jnHRJ1u6h176o2_500.gif">
   </section>
 
@@ -265,31 +265,27 @@
   <section class="slide">
     <h2>Let’s start coding!</h2>
     <p>The <code>setup</code> method is used to setup the window &amp; the environment. Called once when the program starts. You can use it load media, fonts etc.</p>
-    <pre class="left">
-void setup() {
-  size(1024, 768);
-  background(255);
-  stroke(127, 255, 0);
-  line(0, 0, width, height);
-}
-    </pre>
+    <pre class="left">def setup
+  size(1024, 768)
+  background(255)
+  stroke(127, 255, 0)
+  line(0, 0, width, height)
+end    </pre>
     <img src="https://31.media.tumblr.com/6044de85ded8a49a56a5490e4bf31743/tumblr_nh9ideY4x81u6h176o2_250.gif">
   </section>
 
   <section class="slide">
     <h2>The <code>draw</code> method</h2>
     <p>Called to draw each frame (typically 60 fps).</p>
-    <pre class="left">
-void setup() {
-  size(1024, 768);
-  stroke(127, 255, 0);
-}
+    <pre class="left">def setup
+  size(1024, 768)
+  stroke color('#ABCDEF')
+end
 
-void draw() {
-  background(255);
-  line(0, 0, frameCount % width, height);
-}
-    </pre>
+def draw
+  background color('#123456')
+  line(0, 0, frameCount % width, height)
+end</pre>
     <img src="https://38.media.tumblr.com/df4a114eeea0c01384a29df1e8da569c/tumblr_nh91r4vYTr1u6h176o1_400.gif">
   </section>
 
@@ -297,11 +293,9 @@ void draw() {
     <h2>Mouse events</h2>
     <p>You can define callbacks for all mouse related events: move, click, drag, wheel.
     <p>Mouse state can be read through variables: <code>mouseX</code>, <code>mouseY</code>, <code>mouseButton</code>, <code>mousePressed</code>.</p>
-    <pre class="left">
-void mousePressed() {
-  line(mouseX, mouseY, width, height);
-}
-    </pre>
+    <pre class="left">def mousePressed
+  line(mouseX, mouseY, width, height)
+end</pre>
     <img src="https://38.media.tumblr.com/eaf3b37fd29579c2bbbc8c4d7317374d/tumblr_nh8vocpcs31u6h176o1_400.gif">
   </section>
 
@@ -312,15 +306,15 @@ void mousePressed() {
     <table>
       <tr>
         <td>
-          <pre class="left">int step = 0;
-void draw() {
-  line(0, 0, frameCount % width, height - step);
-}
-void keyPressed() {
-  if (key == 'r') {
-    step += 10;
-  }
-}</pre>
+          <pre class="left">$step = 0
+def draw
+  line 0, 0,
+       frameCount % width,
+       height - $step
+end
+def keyPressed
+  $step += 10 if key == 'r'
+end</pre>
         </td>
         <td style='vertical-align:middle'>
           <img src="https://31.media.tumblr.com/eb690c02c5ee6900f5ddbfefa33a341f/tumblr_ni6rl8M28W1u6h176o1_r3_500.gif">
@@ -333,20 +327,18 @@ void keyPressed() {
     <h2>Saving pretty pictures</h2>
     <p>Just call <code>save("name")</code>.
     <p>Append a file extension to the name of the file, to indicate the file format to be used: either TIFF (.tif), TARGA (.tga), JPEG (.jpg), or PNG (.png).</p>
-    <pre style="max-width:666px;float:left;">
-size(500, 500);
-smooth();
-background(#120930);
-stroke(#FFEECC, 20);
-strokeWeight(3);
-for (int i = 0; i &lt; width; i += 7) {
-  line(0, i, i, height);
-  line(0, i, width - i, 0);
-  line(i, 0, width, i);
-  line(i, height, width, height - i);
-}
-save("filename.jpg");
-    </pre>
+    <pre style="max-width:666px;float:left;">size(500, 500)
+smooth
+background color('#120930')
+stroke color('#FFEECC'), 20
+strokeWeight(3)
+(0..width).step(7) do |i|
+  line(0, i, i, height)
+  line(0, i, width - i, 0)
+  line(i, 0, width, i)
+  line(i, height, width, height - i)
+end
+save("filename.jpg")</pre>
     <img src="filename.jpg">
   </section>
 
@@ -354,23 +346,25 @@ save("filename.jpg");
     <h2>Saving a lot of pretty pictures</h2>
     <p>Just call <code>saveFrame("name-####.ext")</code>.
     <p>Saves a numbered sequence of images, one image each time the function is run. You can specify the name of the sequence with the filename parameter, including hash marks (<code>####</code>), which will be replaced by the current frameCount value.</p>
-    <pre style="max-width:666px;float:left;">float rot = 36, deltaRot = -.4;
-void draw() {
-  background(#36465d);
-  int c = 0;
-  translate(width / 2, height / 2);
-  for(int size=240; size>0; size-=10) {
-    fill(c = 255 - c);
-    ellipse(-size,-size,size*2,size);
-    rotate(PI / rot);
-  }
-  rot += deltaRot;
-  if (rot &lt; 12)      deltaRot =  .4;
-  else if (rot > 36) deltaRot = -.4;
-  if (frameCount &lt; 123) {
-    saveFrame("frame-####.png");
-  }
-}</pre>
+    <pre style="max-width:666px;float:left;">$rot = 36
+$deltaRot = -0.4
+def draw
+  background(0x36465d)
+  c = 0
+  translate(width / 2, height / 2)
+  (0..240).step(10).to_a.reverse.each do |size|
+    fill(c = 255 - c)
+    ellipse(-size,-size,size*2,size)
+    rotate(PI / $rot)
+  end
+  $rot += $deltaRot
+  if $rot &lt; 12
+    $deltaRot =  0.4
+  elsif $rot > 36
+    $deltaRot = -0.4
+  end
+  saveFrame("frame-####.png") if frameCount &lt; 123
+end</pre>
     <img src="spin_anim.gif">
   </section>
 
@@ -395,26 +389,24 @@ void draw() {
     <h2>Using existing images</h2>
     <p>Just call <code>loadImage("name")</code> (it needs to be preloaded when using JS).
     <p>You get a <code>PImage</code> object which has <code>width</code>, <code>height</code>, <code>pixels</code>.</p>
-    <pre style="max-width:700px;float:left;">
-PImage photo, starfield;
-void setup() {
-  photo = loadImage("alpha.png");
-  starfield = loadImage("starfield.jpg");
-  size(photo.width, photo.height);
-}
-void draw() {
-  float xoffset = frameCount % width;
-  float yoffset = xoffset*height/width;
-  image(starfield, xoffset, yoffset);
+    <pre style="max-width:700px;float:left;">attr_reader :photo, :starfield
+def setup
+  @photo = load_image(Dir.pwd + "/alpha.png")
+  @starfield = loadImage(Dir.pwd + "/starfield.jpg")
+  size(photo.width, photo.height)
+end
+def draw
+  xoffset = frameCount % width
+  yoffset = xoffset * height / width
+  image(starfield, xoffset, yoffset)
   image(starfield, xoffset - width,
-                   yoffset);
+                   yoffset)
   image(starfield, xoffset,
-                   yoffset - height);
+                   yoffset - height)
   image(starfield, xoffset - width,
-                   yoffset - height);
-  image(photo, 0, 0);
-}
-    </pre>
+                   yoffset - height)
+  image(photo, 0, 0)
+end</pre>
     <img src="raining-stars.gif">
   </section>
 
@@ -423,27 +415,24 @@ void draw() {
     <table>
       <tr>
         <td>
-          <pre style="max-width:700px">
-PShape usa, state;
-String[] Obama = {"HI","RI","CT"...
-String[] McCain = {"AK","GA","AL"...
-void setup() {
-  size(950, 600);
-  usa = loadShape( "http://upload.wikimedia.org/wikipedia/commons/3/32/Blank_US_Map.svg");
-  shape(usa, 0, 0);
-  statesColoring(Obama , #0000FF);
-  statesColoring(McCain, #FF0000);
-}
-void statesColoring(String[] states,
-                    int c) {
-  for (int i=0;i&lt;states.length;++i) {
-    state = usa.getChild(states[i]);
-    state.disableStyle();
-    fill(c);
-    noStroke();
-    shape(state, 0, 0);
-  }
-}</pre>
+          <pre style="max-width:700px">Obama = ["HI","RI","CT","MA","ME"...]
+McCain = ["AK","GA","AL","TN","WV"...]
+def setup
+  size(950, 600)
+  @usa = loadShape( "http://upload.wikimedia.org/wikipedia/commons/3/32/Blank_US_Map.svg")
+  shape(@usa, 0, 0)
+  statesColoring(Obama, 0, 0, 255)
+  statesColoring(McCain, 255, 0, 0)
+end
+def statesColoring(states, r, g, b)
+  states.each do |id|
+    state = @usa.getChild(id)
+    state.disableStyle()
+    fill(r, g, b)
+    noStroke()
+    shape(state, 0, 0)
+  end
+end</pre>
         </td>
         <td>
           <img src="http://upload.wikimedia.org/wikipedia/commons/a/ac/Processing-sketch_jun11a.png">
@@ -454,25 +443,34 @@ void statesColoring(String[] states,
 
   <section class="slide">
     <h2>Let’s do it in 3D!</h2>
-<pre style="max-width:600px;float:left;">
-size(360, 640, P3D);
-background(0);
-lights();
+<pre style="max-width:600px;float:left;">size(360, 640, P3D)
+background(0)
+lights()
 
-noStroke();
-pushMatrix();
-translate(130, 80, 0);
-rotateY(1.25);
-rotateX(-0.4);
-box(100);
-popMatrix();
+noStroke()
+pushMatrix()
+translate(130, 80, 0)
+rotateY(1.25)
+rotateX(-0.4)
+box(100)
+popMatrix()
 
-noFill();
-stroke(255);
-translate(200, height * 0.7, -200);
-sphere(200);
-</pre>
+noFill()
+stroke(255)
+translate(200, height * 0.7, -200)
+sphere(200)</pre>
     <img src="3d.png">
+  </section>
+
+  <section class="slide">
+    <h2>Ruby-Processing goodies</h2>
+    <ul class="left">
+      <li><code>rp5 run my_sketch.rb</code></li>
+      <li><code>rp5 watch my_sketch.rb</code></li>
+      <li><code>rp5 live my_sketch.rb</code></li>
+      <li><h3>Live coding!</h3></li>
+    </ul>
+    <img src="https://38.media.tumblr.com/0c36027af1a27732d1674cc7d90e1627/tumblr_ni19drjXUs1u6h176o1_500.gif">
   </section>
 
   <section class="slide">
@@ -512,6 +510,10 @@ sphere(200);
       <li>
         <a href="http://funprogramming.org/">http://funprogramming.org/</a>
       </li>
+      <li>
+        <a href="https://github.com/jashkenas/ruby-processing/wiki">https://github.com/jashkenas/ruby-processing/wiki</a>
+      </li>
+      <li><h3>Questions?</h3></li>
     </ul>
     <img src="https://33.media.tumblr.com/6333bcaa11ee149e0a3639e99694cdcd/tumblr_nhm5ufzaLU1u6h176o1_500.gif">
   </section>
