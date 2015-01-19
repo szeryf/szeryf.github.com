@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=1024, user-scalable=no">
 
-  <title>Your deck.js Presentation</title>
+  <title>Processing</title>
 
   <!-- Required stylesheet -->
   <link rel="stylesheet" media="screen" href="../deck.js/core/deck.core.css">
@@ -76,6 +76,11 @@
        padding: 2px;
        border:1px solid #021a40;
     }
+    .bottom-right {
+/*      position: absolute;
+      bottom: 50px;
+      right: 50px;
+*/    }
   </style>
 </head>
 <body>
@@ -179,7 +184,7 @@
         Processing.py
       </li>
       <li>
-        Ruby-Processing
+        ruby-processing
       </li>
     </ul>
     <img src="https://31.media.tumblr.com/45953c80e6e18887eccdc087ae6c1c86/tumblr_nhm4f5PKqk1u6h176o4_500.gif">
@@ -365,7 +370,7 @@ def draw
   end
   saveFrame("frame-####.png") if frameCount &lt; 123
 end</pre>
-    <img src="spin_anim.gif">
+    <img class="bottom-right" src="spin_anim.gif">
   </section>
 
   <section class="slide">
@@ -463,7 +468,7 @@ sphere(200)</pre>
   </section>
 
   <section class="slide">
-    <h2>Ruby-Processing goodies</h2>
+    <h2>ruby-processing goodies</h2>
     <ul class="left">
       <li><code>rp5 run my_sketch.rb</code></li>
       <li><code>rp5 watch my_sketch.rb</code></li>
@@ -479,7 +484,6 @@ sphere(200)</pre>
       <li>colors modes: RGB, HSB, extraction &amp; composition helpers, alpha,</li>
       <li>blend modes: addition, substraction, exclusion, dodge, burn etc.,</li>
       <li>filters: blur, treshold, dilate, erode etc.,</li>
-      <li>off-screen graphics,</li>
       <li>curves: bezier &amp; splines,</li>
       <li>shapes, vertexes,</li>
       <li>typography: text display, fonts,</li>
