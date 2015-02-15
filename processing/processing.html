@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=1024, user-scalable=no">
 
-  <title>Processing</title>
+  <title>Processing: an introduction</title>
 
   <!-- Required stylesheet -->
   <link rel="stylesheet" media="screen" href="../deck.js/core/deck.core.css">
@@ -241,7 +241,8 @@
   <section class="slide">
     <h2>Processing.py</h2>
     <p class="left">Just a library, no changes to language</p>
-    <img src="https://41.media.tumblr.com/743cb639a7a649cd4e18ab73ef3bc128/tumblr_nh9f8jLPvs1u6h176o1_1280.jpg">
+    <img style="max-width: 500px"
+         src="https://41.media.tumblr.com/743cb639a7a649cd4e18ab73ef3bc128/tumblr_nh9f8jLPvs1u6h176o1_1280.jpg">
   </section>
 
   <section class="slide">
@@ -598,7 +599,7 @@ sphere(200)</pre>
   };
   $(function() {
     // ligature(false);
-    $("h1,h2,h3,h4").each(function(i, node) { ligature(true, node); });
+    $("h1,h2,h3,h4,blockquote").each(function(i, node) { ligature(true, node); });
     $.deck(".slide");
   });
 </script>
